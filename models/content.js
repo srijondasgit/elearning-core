@@ -12,7 +12,7 @@ const contentSchema = mongoose.Schema({
     contentDescription: {
         type: String
     },
-    type: { 
+    contentType: { 
         type: String,
         default: "Text",
         enum: ["Text","Audio","Video","Image"]

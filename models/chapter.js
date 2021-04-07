@@ -1,6 +1,10 @@
 const mongoose = require ('mongoose');
 
 const BoardsSchema = mongoose.Schema({
+    chapterIndex: {
+        type: Number,
+        required: true
+    },
     boardName: {
         type: String,
         required: true
@@ -21,6 +25,12 @@ const BoardsSchema = mongoose.Schema({
         type: Array
     },
     customContent: {
+        type: Array
+    },
+    standardQuestionSet: {
+        type: Array
+    },
+    customQuestionSet: {
         type: Array
     }
 });
