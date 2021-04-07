@@ -17,7 +17,10 @@ const BoardsSchema = mongoose.Schema({
         default: "Created",
         enum: ["Created","Approved","Hold","Removed"]
     },
-    subjects: {
+    standardContent: {
+        type: Array
+    },
+    customContent: {
         type: Array
     }
 });
