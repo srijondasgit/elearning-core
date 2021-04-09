@@ -1,6 +1,6 @@
 const mongoose = require ('mongoose');
 
-const BoardsSchema = mongoose.Schema({
+const ChaptersSchema = mongoose.Schema({
     chapterIndex: {
         type: Number,
         required: true
@@ -35,4 +35,4 @@ const BoardsSchema = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Board', BoardsSchema);
+module.exports = mongoose.model('Chapter', ChaptersSchema);

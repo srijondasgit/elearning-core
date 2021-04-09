@@ -26,7 +26,7 @@ const SchoolsSchema = mongoose.Schema({
         enum: ["Created","Approved","Hold","Removed"]
     },
     createdRafflesIds: {
-        type: Array
+        type: JSON
     }
 });
 
