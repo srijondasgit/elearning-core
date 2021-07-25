@@ -45,6 +45,25 @@ router.get('/:boardId/getBoard', verify, checkRole(['Admin']), async (req, res) 
     return res.json(boardInstance);
 });
 
+//add class to board
+router.patch('/:boardId/addClass', verify, checkRole(['Admin']), async (req, res) => {
+    try{
+        const updateBoard = await board.updateOne(
+            { _id: req.params.boardId}, 
+            {$push: {class: 
+                {
+                    description: req.body.description,
+                    subjects: []
+                }
+            }
+        });
+
+        return res.json(updateBoard)
+    } catch (err){
+      return res.json({ message: err})
+    }
+})
+
 //remove class from board
 router.delete('/:boardId/removeClass', verify, checkRole(['Admin']), async (req, res) => {
     try{  
@@ -63,11 +82,7 @@ router.delete('/:boardId/removeClass', verify, checkRole(['Admin']), async (req,
 });
 
 
-//get all class ids for a board
-router.get('/:boardId/findBoard', verify, checkRole(['Admin']), async (req, res) => {
-    const boardInstance = await board.findOne({  _id: req.params.boardId })
-    return res.json(boardInstance);
-});
+
 
 
 module.exports = router;
