@@ -21,13 +21,6 @@ const checkRole = roles => async (req, res, next) => {
 
 //create board
 router.post('/createBoard', verify, checkRole(['Admin']), async (req, res) => {
-    
-    //Validation
-    //const { error } = charityValidation(req.body);
-
-    //if(error) return res.status(400).send(error.details[0].message);
-
-    //create new board variable
 
     const boardInstance = new board({
         boardName : req.body.boardName,
@@ -46,34 +39,28 @@ router.post('/createBoard', verify, checkRole(['Admin']), async (req, res) => {
     }
 });
 
-
 //get board details
 router.get('/:boardId/getBoard', verify, checkRole(['Admin']), async (req, res) => {
     const boardInstance = await board.findOne({  _id: req.params.boardId })
     return res.json(boardInstance);
 });
 
-//add class to board
-router.patch('/:boardId/addClass', verify, checkRole(['Admin']), async (req, res) => {
-    try{
-        
+//remove class from board
+router.delete('/:boardId/removeClass', verify, checkRole(['Admin']), async (req, res) => {
+    try{  
         const updateBoard = await board.updateOne(
             { _id: req.params.boardId}, 
-            {$push: {class: 
+            {$pull: {class: 
                         {
-                            description: req.body.description,
-                            subjects: []
+                            _id: req.body.id
                         }
             }
         });
-
         return res.json(updateBoard)
       } catch (err){
         return res.json({ message: err})
-      }
-      
-      //send email that charity has been changed the status
-  })
+      }  
+});
 
 
 //get all class ids for a board
