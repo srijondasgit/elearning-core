@@ -18,7 +18,24 @@ const BoardsSchema = mongoose.Schema({
         enum: ["Created","Approved","Hold","Removed"]
     },
     subjects: {
-        type: Array
+        subjectName: String,
+        chapter: {
+            chapterName: String,
+            chapterDesc: String,
+            questions: [],
+            media:[{
+                name: String,
+                author: String,
+                aboutAuthor: String,
+                language: String,
+                url: String,
+                mediaType:{
+                    type: String,
+                    default: "Audio",
+                    enum: ["Audio", "Video", "Youtube"]
+                }
+            }]
+        } 
     }
 });
 
