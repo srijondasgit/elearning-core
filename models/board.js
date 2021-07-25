@@ -9,6 +9,10 @@ const BoardsSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    boardVersion: {
+        type: String,
+        required: true
+    },
     governmentId: {
         type: String
     },
@@ -17,25 +21,30 @@ const BoardsSchema = mongoose.Schema({
         default: "Created",
         enum: ["Created","Approved","Hold","Removed"]
     },
-    subjects: [{
-        subjectName: String,
-        chapter: {
-            chapterName: String,
-            chapterDesc: String,
-            questions: [],
-            media:[{
-                name: String,
-                author: String,
-                aboutAuthor: String,
-                language: String,
-                url: String,
-                mediaType:{
-                    type: String,
-                    default: "Audio",
-                    enum: ["Audio", "Video", "Youtube"]
-                }
-            }]
-        } 
+    class: [{
+        description: { 
+            type: String
+        },
+        subjects: [{
+            subjectName: String,
+            chapter: {
+                chapterName: String,
+                chapterDesc: String,
+                questions: [],
+                media:[{
+                    name: String,
+                    author: String,
+                    aboutAuthor: String,
+                    language: String,
+                    url: String,
+                    mediaType:{
+                        type: String,
+                        default: "Audio",
+                        enum: ["Audio", "Video", "Youtube"]
+                    }
+                }]
+            } 
+        }]
     }]
 });
 

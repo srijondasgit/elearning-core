@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const verify = require('./verifyToken') 
-const charities = require('../models/board.js') 
+const board = require('../models/board.js') 
 const { charityValidation } = require('../validation')
 const User = require('../models/User');
 const sendmail = require('../config/sendmail')
@@ -29,52 +29,64 @@ router.post('/createBoard', verify, checkRole(['Admin']), async (req, res) => {
 
     //create new board variable
 
-    const board = new board({
+    const boardInstance = new board({
         boardName : req.body.boardName,
         boardDescription : req.body.boardDescription,
+        boardVersion : req.body.boardVersion,
         governmentId : req.body.governmentId,
         status : "Created",
         subjects : []
     });
 
     try{
-        const savedBoard = await board.save();
-
-        //send email that charity has been registered
-        //sendmail(req.user.email,"Your Charity has been registered","Charity has been created with details : "+savedCharity)
-
+        const savedBoard = await boardInstance.save();
         return res.json(savedBoard);
     } catch (err){
         return res.json({ message: err})
     }
-
-    //Check if user exists
-    const emailExists = await charities.findOne({  ownerEmail: req.user.email })
-    
-    if(emailExists != null) return res.status(400).send('Email already exists, only one email id can be used to register a charity')
-
-    const charity = new charities({
-        charityName: req.body.charityName,
-        description: req.body.description,
-        charityGvtId: req.body.charityGvtId,
-        ownerName: req.user.name,
-        ownerEmail: req.user.email,
-        status: req.body.status 
-    });
-
-    try{
-        const savedCharity = await charity.save();
-
-        //send email that charity has been registered
-        sendmail(req.user.email,"Your Charity has been registered","Charity has been created with details : "+savedCharity)
-
-        return res.json(savedCharity);
-    } catch (err){
-        return res.json({ message: err})
-    }
-
-
 });
+
+
+//get board details
+router.get('/:boardId/getBoard', verify, checkRole(['Admin']), async (req, res) => {
+    const boardInstance = await board.findOne({  _id: req.params.boardId })
+    return res.json(boardInstance);
+});
+
+//add class to board
+router.patch('/:boardId/addClass', verify, checkRole(['Admin']), async (req, res) => {
+    try{
+        
+        const updateBoard = await board.updateOne(
+            { _id: req.params.boardId}, 
+            {$push: {class: 
+                        {
+                            description: req.body.description,
+                            subjects: []
+                        }
+            }
+        });
+
+        return res.json(updateBoard)
+      } catch (err){
+        return res.json({ message: err})
+      }
+      
+      //send email that charity has been changed the status
+  })
+
+
+//get all class ids for a board
+router.get('/:boardId/findBoard', verify, checkRole(['Admin']), async (req, res) => {
+    const boardInstance = await board.findOne({  _id: req.params.boardId })
+    return res.json(boardInstance);
+});
+
+
+module.exports = router;
+
+
+
 
 router.get('/', async (req, res) => {
     const allCharities = await charities.find()
