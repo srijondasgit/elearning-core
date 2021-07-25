@@ -17,7 +17,7 @@ const BoardsSchema = mongoose.Schema({
         default: "Created",
         enum: ["Created","Approved","Hold","Removed"]
     },
-    subjects: {
+    subjects: [{
         subjectName: String,
         chapter: {
             chapterName: String,
@@ -36,7 +36,7 @@ const BoardsSchema = mongoose.Schema({
                 }
             }]
         } 
-    }
+    }]
 });
 
 module.exports = mongoose.model('Board', BoardsSchema);

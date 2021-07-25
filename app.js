@@ -29,6 +29,9 @@ app.use('/school', schoolRoutes);
 const boardRoutes = require('./routes/board');
 app.use('/board', boardRoutes);
 
+const authRoutes = require('./routes/auth');
+app.use('/auth', authRoutes);
+
 //Routes
 app.get('/',(req,res)=> {
     res.send('We are at Home directory')
