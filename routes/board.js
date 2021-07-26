@@ -40,13 +40,13 @@ router.post('/createBoard', verify, checkRole(['Admin']), async (req, res) => {
 });
 
 //get board details
-router.get('/:boardId/getBoard', verify, checkRole(['Admin']), async (req, res) => {
+router.get('/boardId/:boardId/getBoard', verify, checkRole(['Admin']), async (req, res) => {
     const boardInstance = await board.findOne({  _id: req.params.boardId })
     return res.json(boardInstance);
 });
 
 //add class to board
-router.patch('/:boardId/addClass', verify, checkRole(['Admin']), async (req, res) => {
+router.patch('/boardId/:boardId/addClass', verify, checkRole(['Admin']), async (req, res) => {
     try{
         const updateBoard = await board.updateOne(
             { _id: req.params.boardId}, 
@@ -65,13 +65,13 @@ router.patch('/:boardId/addClass', verify, checkRole(['Admin']), async (req, res
 })
 
 //remove class from board
-router.delete('/:boardId/removeClass', verify, checkRole(['Admin']), async (req, res) => {
+router.delete('/boardId/:boardId/classId/:classId/removeClass', verify, checkRole(['Admin']), async (req, res) => {
     try{  
         const updateBoard = await board.updateOne(
             { _id: req.params.boardId}, 
             {$pull: {class: 
                         {
-                            _id: req.body.id
+                            _id: req.params.classId
                         }
             }
         });
@@ -81,7 +81,32 @@ router.delete('/:boardId/removeClass', verify, checkRole(['Admin']), async (req,
       }  
 });
 
+//get class details using boardid, classid
+router.get('/boardId/:boardId/classId/:classId/getClass', verify, checkRole(['Admin']), async (req, res) => {
+    const classInstance = await board.find({ "_id": req.params.boardId, "class._id": req.params.classId})
+    return res.json(classInstance);
+});
 
+//add/modify subject to board, class
+router.patch('/boardId/:boardId/classId/:classId/addSubject', verify, checkRole(['Admin']), async (req, res) => {
+    try{
+        const updateBoard = await board.update(
+            { "_id": req.params.boardId, "class._id": req.params.classId},
+            {$push: 
+                {"class.$.subjects": 
+                    {
+                        subjectName: req.body.subjectName, 
+                        chapter: [] 
+                    }
+                }
+            }
+        ); 
+
+        return res.json(updateBoard)
+    } catch (err){
+      return res.json({ message: err})
+    }
+})
 
 
 
@@ -89,52 +114,6 @@ module.exports = router;
 
 
 
-
-router.get('/', async (req, res) => {
-    const allCharities = await charities.find()
-    return res.json(allCharities);
-})
-
-router.get('/owner', verify, checkRole(['CharityAdmin']), async (req, res) => {
-    const oneCharity = await charities.findOne({  ownerEmail: req.user.email })
-    return res.json(oneCharity);
-})
-
-//Create a new charity
-router.post('/', verify, checkRole(['CharityAdmin']), async (req, res) => {
-    
-    //Validation
-    //const { error } = charityValidation(req.body);
-
-    if(error) return res.status(400).send(error.details[0].message);
-
-    //Check if user exists
-    const emailExists = await charities.findOne({  ownerEmail: req.user.email })
-    
-    if(emailExists != null) return res.status(400).send('Email already exists, only one email id can be used to register a charity')
-
-    const charity = new charities({
-        charityName: req.body.charityName,
-        description: req.body.description,
-        charityGvtId: req.body.charityGvtId,
-        ownerName: req.user.name,
-        ownerEmail: req.user.email,
-        status: req.body.status 
-    });
-
-    try{
-        const savedCharity = await charity.save();
-
-        //send email that charity has been registered
-        sendmail(req.user.email,"Your Charity has been registered","Charity has been created with details : "+savedCharity)
-
-        return res.json(savedCharity);
-    } catch (err){
-        return res.json({ message: err})
-    }
-
-
-});
 
 //only superadmin allowed to change status of Charity, 
 //every Charity needs to be in Approved status before Raffle events can be created for that Charity

@@ -26,8 +26,10 @@ const BoardsSchema = mongoose.Schema({
             type: String
         },
         subjects: [{
-            subjectName: String,
-            chapter: {
+            subjectName: {
+                type: String
+            },
+            chapter: [{
                 chapterName: String,
                 chapterDesc: String,
                 questions: [],
@@ -43,7 +45,7 @@ const BoardsSchema = mongoose.Schema({
                         enum: ["Audio", "Video", "Youtube"]
                     }
                 }]
-            } 
+            }] 
         }]
     }]
 });
