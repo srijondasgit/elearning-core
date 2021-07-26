@@ -137,8 +137,6 @@ router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/addChapter
     }
 })
 
-
-
 //add/modify media to board, class, subject, chapter
 router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/addMedia', verify, checkRole(['Admin']), async (req, res) => {
     try{
@@ -167,34 +165,6 @@ router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/
       return res.json({ message: err})
     }
 })
-
-module.exports = router;
-
-
-
-
-//only superadmin allowed to change status of Charity, 
-//every Charity needs to be in Approved status before Raffle events can be created for that Charity
-router.patch('/:charityId/changeStatus', verify, checkRole(['SuperAdmin']), async (req, res) => {
-    try{
-        
-        const updateCharityStatus = await charities.updateOne(
-            { _id: req.params.charityId}, 
-            {$set: {status: req.body.status}});
-
-        const findCharity = await charities.findOne({ _id: req.params.charityId})
-
-        //console.log("find charity email: "+findCharity.ownerEmail)
-        //send email that charity has been registered
-        sendmail(findCharity.ownerEmail,"Your Charity status has changed","Charity status has changed with current status : " +findCharity.status)
-
-        return res.json(updateCharityStatus)
-      } catch (err){
-        return res.json({ message: err})
-      }
-      
-      //send email that charity has been changed the status
-  })
 
 module.exports = router;
 
