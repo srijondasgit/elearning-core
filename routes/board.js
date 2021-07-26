@@ -98,6 +98,7 @@ router.patch('/boardId/:boardId/classId/:classId/addSubject', verify, checkRole(
             {$push: 
                 {"class.$.subjects": 
                     {
+                        indx: req.body.indx,
                         subjectName: req.body.subjectName, 
                         chapter: [] 
                     }
@@ -119,6 +120,7 @@ router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/addChapter
             {$push: 
                 {"class.$[e1].subjects.$[e2].chapter": 
                     {
+                        indx: req.body.indx,
                         chapterName: req.body.chapterName,
                         chapterDesc: req.body.chapterDesc,
                         questions: [],
@@ -137,7 +139,7 @@ router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/addChapter
     }
 })
 
-//add/modify media to board, class, subject, chapter
+//add media to board, class, subject, chapter
 router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/addMedia', verify, checkRole(['Admin']), async (req, res) => {
     try{
         const updateBoard = await board.update(
@@ -145,6 +147,7 @@ router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/
             {$push: 
                 {"class.$[e1].subjects.$[e2].chapter.$[e3].media": 
                     {
+                        indx: req.body.indx,
                         name: req.body.name,
                         author: req.body.author,
                         aboutAuthor: req.body.aboutAuthor,
@@ -165,6 +168,40 @@ router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/
       return res.json({ message: err})
     }
 })
+
+//modify media associated with board, class, subject, chapter
+router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/mediaId/:mediaId/modifyMedia', verify, checkRole(['Admin']), async (req, res) => {
+    try{
+        const updateBoard = await board.update(
+            { "_id": req.params.boardId}, 
+            {$set: 
+                {"class.$[e1].subjects.$[e2].chapter.$[e3].media.$[e4]": 
+                    {
+                        indx: req.body.indx,
+                        name: req.body.name,
+                        author: req.body.author,
+                        aboutAuthor: req.body.aboutAuthor,
+                        language: req.body.language,
+                        url: req.body.url,
+                        mediaType: req.body.mediaType
+                    }
+                }
+            },
+            {arrayFilters: [{"e1._id": req.params.classId},
+                            {"e2._id": req.params.subjectId},
+                            {"e3._id": req.params.chapterId},
+                            {"e4._id": req.params.mediaId}
+                            ]}
+        ); 
+
+        return res.json(updateBoard)
+    } catch (err){
+      return res.json({ message: err})
+    }
+})
+
+
+
 
 module.exports = router;
 

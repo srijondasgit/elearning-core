@@ -1,6 +1,7 @@
 const mongoose = require ('mongoose');
 
 const BoardsSchema = mongoose.Schema({
+    indx: Number,
     boardName: {
         type: String,
         required: true
@@ -22,18 +23,24 @@ const BoardsSchema = mongoose.Schema({
         enum: ["Created","Approved","Hold","Removed"]
     },
     class: [{
-        description: { 
+        description: {
+            indx: Number, 
             type: String
         },
         subjects: [{
             subjectName: {
+                indx: Number,
                 type: String
             },
             chapter: [{
+                indx: Number,
                 chapterName: String,
                 chapterDesc: String,
-                questions: [],
+                questions: [{
+                    indx: Number,
+                    description: String}],
                 media:[{
+                    indx: Number,
                     name: String,
                     author: String,
                     aboutAuthor: String,
