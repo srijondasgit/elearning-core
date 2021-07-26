@@ -137,6 +137,37 @@ router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/addChapter
     }
 })
 
+
+
+//add/modify media to board, class, subject, chapter
+router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/addMedia', verify, checkRole(['Admin']), async (req, res) => {
+    try{
+        const updateBoard = await board.update(
+            { "_id": req.params.boardId}, 
+            {$push: 
+                {"class.$[e1].subjects.$[e2].chapter.$[e3].media": 
+                    {
+                        name: req.body.name,
+                        author: req.body.author,
+                        aboutAuthor: req.body.aboutAuthor,
+                        language: req.body.language,
+                        url: req.body.url,
+                        mediaType: req.body.mediaType
+                    }
+                }
+            },
+            {arrayFilters: [{"e1._id": req.params.classId},
+                            {"e2._id": req.params.subjectId},
+                            {"e3._id": req.params.chapterId}
+                            ]}
+        ); 
+
+        return res.json(updateBoard)
+    } catch (err){
+      return res.json({ message: err})
+    }
+})
+
 module.exports = router;
 
 
