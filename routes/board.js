@@ -268,6 +268,32 @@ router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/
     }
 })
 
+//remove media from board, class, subject, chapter
+router.delete('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/mediaId/:mediaId', verify, checkRole(['Admin']), async (req, res) => {
+    try{
+        const updateBoard = await board.update(
+            { "_id": req.params.boardId}, 
+            {$pull: 
+                {"class.$[e1].subjects.$[e2].chapter.$[e3].media": 
+                    {
+                        _id: req.params.mediaId
+                    }
+                }
+            },
+            {arrayFilters: [{"e1._id": req.params.classId},
+                            {"e2._id": req.params.subjectId},
+                            {"e3._id": req.params.chapterId},
+                            {"e4._id": req.params.mediaId}]
+            }
+        ); 
+
+        return res.json(updateBoard)
+    } catch (err){
+      return res.json({ message: err})
+    }
+})
+
+
 //add questions to board, class, subject, chapter
 router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/addQuestion', verify, checkRole(['Admin']), async (req, res) => {
     try{
