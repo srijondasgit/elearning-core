@@ -112,7 +112,7 @@ router.patch('/boardId/:boardId/classId/:classId/addSubject', verify, checkRole(
     }
 })
 
-//add/modify chapter to board, class, subject
+//add chapter to board, class, subject
 router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/addChapter', verify, checkRole(['Admin']), async (req, res) => {
     try{
         const updateBoard = await board.update(
@@ -131,6 +131,28 @@ router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/addChapter
             {arrayFilters: [{"e1._id": req.params.classId},
                             {"e2._id": req.params.subjectId}
                             ]}
+        ); 
+
+        return res.json(updateBoard)
+    } catch (err){
+      return res.json({ message: err})
+    }
+})
+
+//modify chapter details associated with chapterid
+router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/modifyChapter', verify, checkRole(['Admin']), async (req, res) => {
+    try{
+        const updateBoard = await board.findOneAndUpdate(
+            { "class.subjects.chapter._id": req.params.chapterId},  
+            {
+                indx: req.body.indx,
+                chapterName: req.body.chapterName,
+                chapterDesc: req.body.chapterDesc
+            },
+            {
+                omitUndefined:true,
+            },
+            
         ); 
 
         return res.json(updateBoard)
