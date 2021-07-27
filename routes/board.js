@@ -19,6 +19,12 @@ const checkRole = roles => async (req, res, next) => {
     });
 }
 
+//get board details
+router.get('/boardId/:boardId/getBoard', verify, checkRole(['Admin']), async (req, res) => {
+    const boardInstance = await board.findOne({  _id: req.params.boardId })
+    return res.json(boardInstance);
+});
+
 //create board
 router.post('/createBoard', verify, checkRole(['Admin']), async (req, res) => {
 
@@ -39,10 +45,43 @@ router.post('/createBoard', verify, checkRole(['Admin']), async (req, res) => {
     }
 });
 
-//get board details
-router.get('/boardId/:boardId/getBoard', verify, checkRole(['Admin']), async (req, res) => {
-    const boardInstance = await board.findOne({  _id: req.params.boardId })
-    return res.json(boardInstance);
+//modify board 
+router.patch('/boardId/:boardId/modifyBoard', verify, checkRole(['Admin']), async (req, res) => {
+    try{
+        const findBoard= await board.findById({"_id": req.params.boardId});
+        const curr_class = findBoard.class
+
+        const updateBoard = await board.findOneAndUpdate(
+            { "_id": req.params.boardId}, 
+            {$set: 
+                {
+                    boardName: req.body.boardName,
+                    boardDescription: req.body.boardDescription,
+                    boardVersion: req.body.boardVersion,
+                    governmentId: req.body.governmentId,
+                    status: req.body.status,
+                    class: curr_class
+                }
+            }
+        ); 
+ 
+
+        return res.json(updateBoard)
+    } catch (err){
+      return res.json({ message: err})
+    }
+})
+
+// delete board
+router.delete('/boardId/:boardId/', verify, checkRole(['Admin']), async (req, res) => {
+    try{  
+        const updateBoard = await board.deleteOne(
+            { _id: req.params.boardId}, 
+        );
+        return res.json(updateBoard)
+      } catch (err){
+        return res.json({ message: err})
+      }  
 });
 
 //add class to board
@@ -65,7 +104,7 @@ router.patch('/boardId/:boardId/addClass', verify, checkRole(['Admin']), async (
 })
 
 //remove class from board
-router.delete('/boardId/:boardId/classId/:classId/removeClass', verify, checkRole(['Admin']), async (req, res) => {
+router.delete('/boardId/:boardId/classId/:classId/', verify, checkRole(['Admin']), async (req, res) => {
     try{  
         const updateBoard = await board.updateOne(
             { _id: req.params.boardId}, 
@@ -143,6 +182,30 @@ router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/modifySubj
       return res.json({ message: err})
     }
 })
+
+//remove subject from board, class
+router.delete('/boardId/:boardId/classId/:classId/subjectId/:subjectId', verify, checkRole(['Admin']), async (req, res) => {
+    try{
+        const updateBoard = await board.update(
+            { "_id": req.params.boardId}, 
+            {$pull: 
+                {"class.$[e1].subjects": 
+                    {
+                        _id: req.params.subjectId
+                    }
+                }
+            },
+            {arrayFilters: [{"e1._id": req.params.classId},
+                            {"e2._id": req.params.subjectId}]
+            }
+        ); 
+
+        return res.json(updateBoard)
+    } catch (err){
+      return res.json({ message: err})
+    }
+})
+
 
 
 //add chapter to board, class, subject
