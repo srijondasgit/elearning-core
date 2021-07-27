@@ -268,7 +268,30 @@ router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/
     }
 })
 
+//add questions to board, class, subject, chapter
+router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/addQuestion', verify, checkRole(['Admin']), async (req, res) => {
+    try{
+        const updateBoard = await board.update(
+            { "_id": req.params.boardId}, 
+            {$push: 
+                {"class.$[e1].subjects.$[e2].chapter.$[e3].questions": 
+                    {
+                        indx: req.body.indx,
+                        description: req.body.description,
+                    }
+                }
+            },
+            {arrayFilters: [{"e1._id": req.params.classId},
+                            {"e2._id": req.params.subjectId},
+                            {"e3._id": req.params.chapterId}
+                            ]}
+        ); 
 
+        return res.json(updateBoard)
+    } catch (err){
+      return res.json({ message: err})
+    }
+})
 
 
 module.exports = router;
