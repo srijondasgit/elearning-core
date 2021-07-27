@@ -28,8 +28,8 @@ const BoardsSchema = mongoose.Schema({
             type: String
         },
         subjects: [{
+            indx: Number,
             subjectName: {
-                indx: Number,
                 type: String
             },
             chapter: [{
