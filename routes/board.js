@@ -5,8 +5,6 @@ const board = require('../models/board.js')
 const { charityValidation } = require('../validation')
 const User = require('../models/User');
 const sendmail = require('../config/sendmail')
-// const jwt = require('jsonwebtoken');
-// const TicketSchema = require('../models/tickets.js')
 
 const checkRole = roles => async (req, res, next) => {
     const user = await User.findOne({ _id: req.user._id });
@@ -18,6 +16,13 @@ const checkRole = roles => async (req, res, next) => {
         success: false
     });
 }
+
+//get all boards
+router.get('/getAllBoards', verify, checkRole(['Admin']), async (req, res) => {
+    const boardInstance = await board.find()
+    const result = boardInstance.map(a => ({"_id": a._id,"boardName": a.boardName}))
+    return res.json(result);
+});
 
 //get board details
 router.get('/boardId/:boardId/getBoard', verify, checkRole(['Admin']), async (req, res) => {
