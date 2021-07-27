@@ -83,7 +83,9 @@ router.delete('/boardId/:boardId/classId/:classId/removeClass', verify, checkRol
 
 //get class details using boardid, classid
 router.get('/boardId/:boardId/classId/:classId/getClass', verify, checkRole(['Admin']), async (req, res) => {
-    const classInstance = await board.find({ "_id": req.params.boardId, "class._id": req.params.classId})
+    const boardInstance = await board.findById({ "_id": req.params.boardId})
+    const classInstance= boardInstance.class.id(req.params.classId)
+        
     return res.json(classInstance);
 });
 
