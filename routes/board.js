@@ -108,6 +108,34 @@ router.patch('/boardId/:boardId/addClass', verify, checkRole(['Admin']), async (
     }
 })
 
+//modify class associated with board
+router.patch('/boardId/:boardId/classId/:classId/modifyClass', verify, checkRole(['Admin']), async (req, res) => {
+    try{
+        const findSubject= await board.findById({"_id": req.params.boardId});
+        const result= findSubject.class.id(req.params.classId);
+        const curr_subjects = result.subjects
+
+        //return res.json(result )
+        const updateBoard = await board.findOneAndUpdate(
+            { "_id": req.params.boardId, "class._id": req.params.classId}, 
+            {$set: 
+                {"class.$[e1]": 
+                    {
+                        "indx": req.body.indx,
+                        "description": req.body.description,
+                        "subjects": curr_subjects
+                    }
+                }
+            },
+            {arrayFilters: [{"e1._id": req.params.classId}
+                            ]}
+            ); 
+        return res.json(updateBoard)
+    } catch (err){
+        return res.json({ message: err})
+    }
+})
+
 //remove class from board
 router.delete('/boardId/:boardId/classId/:classId/', verify, checkRole(['Admin']), async (req, res) => {
     try{  
@@ -402,8 +430,7 @@ router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/
             },
             {arrayFilters: [{"e1._id": req.params.classId},
                             {"e2._id": req.params.subjectId},
-                            {"e3._id": req.params.chapterId}
-                            ]}
+                            {"e3._id": req.params.chapterId}]}
         ); 
 
         return res.json(updateBoard)
@@ -455,4 +482,4 @@ module.exports = router;
 //remove chapter to board, class, subject
 //remove chapter desc to board, class, subject, chapter
 //remove media to board, class, subject, chapter
-//remove questions to board, class, subject, chapter
+//remove questions to board, class, subject

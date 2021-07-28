@@ -23,10 +23,8 @@ const BoardsSchema = mongoose.Schema({
         enum: ["Created","Approved","Hold","Removed"]
     },
     class: [{
-        description: {
-            indx: Number, 
-            type: String
-        },
+        indx: Number,
+        description: String,
         subjects: [{
             indx: Number,
             subjectName: {
