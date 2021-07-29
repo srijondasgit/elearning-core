@@ -26,8 +26,12 @@ router.get('/getAllBoards', verify, checkRole(['Admin']), async (req, res) => {
 
 //get board details
 router.get('/boardId/:boardId/getBoard', verify, checkRole(['Admin']), async (req, res) => {
-    const boardInstance = await board.findOne({  _id: req.params.boardId })
-    return res.json(boardInstance);
+    try{
+        const boardInstance = await board.findOne({  _id: req.params.boardId })
+        return res.json(boardInstance);
+    } catch (err){
+    return res.json({ message: err})
+    }
 });
 
 //create board
