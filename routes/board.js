@@ -345,6 +345,14 @@ router.get('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:c
     return res.json(chapterInstance);
 });
 
+//get media details using boardid, classid, subject, chapter, media
+router.get('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/mediaId/:mediaId/getMedia', verify, checkRole(['Admin']), async (req, res) => {
+    const boardInstance = await board.findById({ "_id": req.params.boardId})
+    const mediaInstance= boardInstance.class.id(req.params.classId).subjects.id(req.params.subjectId).chapter.id(req.params.chapterId).media.id(req.params.mediaId)
+        
+    return res.json(mediaInstance);
+});
+
 //add media to board, class, subject, chapter
 router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/addMedia', verify, checkRole(['Admin']), async (req, res) => {
     try{
