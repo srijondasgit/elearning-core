@@ -184,7 +184,7 @@ router.patch('/boardId/:boardId/classId/:classId/addSubject', verify, checkRole(
     } catch (err){
       return res.json({ message: err})
     }
-})
+});
 
 //modify subject associated with board, class
 router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/modifySubject', verify, checkRole(['Admin']), async (req, res) => {
@@ -214,7 +214,7 @@ router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/modifySubj
     } catch (err){
       return res.json({ message: err})
     }
-})
+});
 
 //remove subject from board, class
 router.delete('/boardId/:boardId/classId/:classId/subjectId/:subjectId', verify, checkRole(['Admin']), async (req, res) => {
@@ -237,9 +237,15 @@ router.delete('/boardId/:boardId/classId/:classId/subjectId/:subjectId', verify,
     } catch (err){
       return res.json({ message: err})
     }
-})
+});
 
-
+//get subject details using boardid, classid, subject
+router.get('/boardId/:boardId/classId/:classId/subjectId/:subjectId/getSubject', verify, checkRole(['Admin']), async (req, res) => {
+    const boardInstance = await board.findById({ "_id": req.params.boardId})
+    const subjectInstance= boardInstance.class.id(req.params.classId).subjects.id(req.params.subjectId)
+        
+    return res.json(subjectInstance);
+});
 
 //add chapter to board, class, subject
 router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/addChapter', verify, checkRole(['Admin']), async (req, res) => {
@@ -266,7 +272,7 @@ router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/addChapter
     } catch (err){
       return res.json({ message: err})
     }
-})
+});
 
 //modify chapter details associated with chapterid
 router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/modifyChapter', verify, checkRole(['Admin']), async (req, res) => {
