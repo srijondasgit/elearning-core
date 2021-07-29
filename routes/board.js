@@ -471,6 +471,32 @@ router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/
     }
 })
 
+//modify questions associated with board, class, subject, chapter
+router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/questionId/:questionId/modifyQuestion', verify, checkRole(['Admin']), async (req, res) => {
+    try{
+        const updateBoard = await board.update(
+            { "_id": req.params.boardId}, 
+            {$set: 
+                {"class.$[e1].subjects.$[e2].chapter.$[e3].questions.$[e4]": 
+                    {
+                        indx: req.body.indx,
+                        description: req.body.description
+                    }
+                }
+            },
+            {arrayFilters: [{"e1._id": req.params.classId},
+                            {"e2._id": req.params.subjectId},
+                            {"e3._id": req.params.chapterId},
+                            {"e4._id": req.params.questionId}
+                            ]}
+        ); 
+
+        return res.json(updateBoard)
+    } catch (err){
+      return res.json({ message: err})
+    }
+})
+
 //remove questions to board, class, subject, chapter
 router.delete('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/questionId/:questionId', verify, checkRole(['Admin']), async (req, res) => {
     try{
