@@ -1,0 +1,913 @@
+{
+	"info": {
+		"_postman_id": "ac077c5b-0d2e-4c10-a2f4-74f0de20bc9e",
+		"name": "gitanjalicore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:3001/auth/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"testuser\",\n    \"role\": \"User\",\n    \"email\": \"testuser110@testuser.com\",\n    \"password\": \"Pass123word\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/auth/register",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3001/auth/verify",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"testuser111@testuser.com\",\n    \"activationcode\": \"9210\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/auth/verify",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"auth",
+						"verify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3001/auth/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"testuser111@testuser.com\",\n    \"password\": \"Pass123word\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBoard",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth-token",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE3ODkwNSwiZXhwIjoxNjI3NzgzNzA1fQ.iRzvRkrbO7oUMiDWzLIlnMzpSXNpNaMl-v0K3zZ0m-8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/board/boardId/60ff08c1156c7884029a909b/getBoard",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"boardId",
+						"60ff08c1156c7884029a909b",
+						"getBoard"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllBoards",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE5NzYxNCwiZXhwIjoxNjI3ODAyNDE0fQ.l8QLv4O5jwu32S6wV-YLUNS3O5DCgt0IwE5Hg9atU9I",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3001/board/getAllBoards",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"getAllBoards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createBoard",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE3ODkwNSwiZXhwIjoxNjI3NzgzNzA1fQ.iRzvRkrbO7oUMiDWzLIlnMzpSXNpNaMl-v0K3zZ0m-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"indx\": 1,\n    \"boardName\": \"another board\",\n    \"boardDescription\": \"some board description\",\n    \"governmentId\": \"some gvt id\",\n    \"boardVersion\": \"2021.07.01\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/board/createBoard",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"createBoard"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "modifyBoard",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE5NzYxNCwiZXhwIjoxNjI3ODAyNDE0fQ.l8QLv4O5jwu32S6wV-YLUNS3O5DCgt0IwE5Hg9atU9I",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"boardName\": \"another board name\",\n    \"boardDescription\": \"a different board description\",\n    \"boardVersion\": \"2021.07.05\",\n    \"governmentId\": \"gov-id-23432414545\",\n    \"status\": \"Created\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/board/boardId/60ff08c1156c7884029a909b/modifyBoard",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"boardId",
+						"60ff08c1156c7884029a909b",
+						"modifyBoard"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "removeBoard",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE5NzYxNCwiZXhwIjoxNjI3ODAyNDE0fQ.l8QLv4O5jwu32S6wV-YLUNS3O5DCgt0IwE5Hg9atU9I",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3001/board/boardId/60ff08c1156c7884029a909b",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"boardId",
+						"60ff08c1156c7884029a909b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getClass",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE5NzYxNCwiZXhwIjoxNjI3ODAyNDE0fQ.l8QLv4O5jwu32S6wV-YLUNS3O5DCgt0IwE5Hg9atU9I",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3001/board/boardId/60fe16194458905af9ab610f/classId/60fe16cf4458905af9ab6113/getClass",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"boardId",
+						"60fe16194458905af9ab610f",
+						"classId",
+						"60fe16cf4458905af9ab6113",
+						"getClass"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addClass",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "auth-token",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE3ODkwNSwiZXhwIjoxNjI3NzgzNzA1fQ.iRzvRkrbO7oUMiDWzLIlnMzpSXNpNaMl-v0K3zZ0m-8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"indx\": 1,\n    \"description\": \"Class 10\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/board/boardId/60ff08c1156c7884029a909b/addClass",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"boardId",
+						"60ff08c1156c7884029a909b",
+						"addClass"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "modifyClass",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE5NzYxNCwiZXhwIjoxNjI3ODAyNDE0fQ.l8QLv4O5jwu32S6wV-YLUNS3O5DCgt0IwE5Hg9atU9I",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"indx\": 1122,\n    \"description\": \"this is a description for testing\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/board/boardId/6100a3890a1dc5fd4c57e45a/classId/6100a71146e573fef7c63f0c/modifyClass",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"boardId",
+						"6100a3890a1dc5fd4c57e45a",
+						"classId",
+						"6100a71146e573fef7c63f0c",
+						"modifyClass"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "removeClass",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "auth-token",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE3ODkwNSwiZXhwIjoxNjI3NzgzNzA1fQ.iRzvRkrbO7oUMiDWzLIlnMzpSXNpNaMl-v0K3zZ0m-8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/board/boardId/60ff08c1156c7884029a909b/classId/60ff08cc156c7884029a909c",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"boardId",
+						"60ff08c1156c7884029a909b",
+						"classId",
+						"60ff08cc156c7884029a909c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getSubject",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE5NzYxNCwiZXhwIjoxNjI3ODAyNDE0fQ.l8QLv4O5jwu32S6wV-YLUNS3O5DCgt0IwE5Hg9atU9I",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3001/board/boardId/6100d29c85d8db001206bda1/classId/6100e79070954d0fc6e459db/subjectId/6100d33885d8db001206bda8/getSubject",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"boardId",
+						"6100d29c85d8db001206bda1",
+						"classId",
+						"6100e79070954d0fc6e459db",
+						"subjectId",
+						"6100d33885d8db001206bda8",
+						"getSubject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addSubject",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE5NzYxNCwiZXhwIjoxNjI3ODAyNDE0fQ.l8QLv4O5jwu32S6wV-YLUNS3O5DCgt0IwE5Hg9atU9I",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"indx\": 1,\n    \"subjectName\": \"Science29\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/board/boardId/60ff08c1156c7884029a909b/classId/60ff08cc156c7884029a909c/addSubject",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"boardId",
+						"60ff08c1156c7884029a909b",
+						"classId",
+						"60ff08cc156c7884029a909c",
+						"addSubject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "modifySubject",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE5NzYxNCwiZXhwIjoxNjI3ODAyNDE0fQ.l8QLv4O5jwu32S6wV-YLUNS3O5DCgt0IwE5Hg9atU9I",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"subjectName\": \"changing the name\",\n    \"indx\": 999\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/board/boardId/60ff08c1156c7884029a909b/classId/60ff08cc156c7884029a909c/subjectId/610067cfbc21b0dfa5b23f8f/modifySubject",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"boardId",
+						"60ff08c1156c7884029a909b",
+						"classId",
+						"60ff08cc156c7884029a909c",
+						"subjectId",
+						"610067cfbc21b0dfa5b23f8f",
+						"modifySubject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "removeSubject",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE5NzYxNCwiZXhwIjoxNjI3ODAyNDE0fQ.l8QLv4O5jwu32S6wV-YLUNS3O5DCgt0IwE5Hg9atU9I",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3001/board/boardId/60ff08c1156c7884029a909b/classId/60ff08cc156c7884029a909c/subjectId/61006745cd2041df82cef3f3/",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"boardId",
+						"60ff08c1156c7884029a909b",
+						"classId",
+						"60ff08cc156c7884029a909c",
+						"subjectId",
+						"61006745cd2041df82cef3f3",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getChapter",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE5NzYxNCwiZXhwIjoxNjI3ODAyNDE0fQ.l8QLv4O5jwu32S6wV-YLUNS3O5DCgt0IwE5Hg9atU9I",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3001/board/boardId/6100d29c85d8db001206bda1/classId/6100e79070954d0fc6e459db/subjectId/6100d33885d8db001206bda8/chapterId/6100d3d285d8db001206bdad/getChapter",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"boardId",
+						"6100d29c85d8db001206bda1",
+						"classId",
+						"6100e79070954d0fc6e459db",
+						"subjectId",
+						"6100d33885d8db001206bda8",
+						"chapterId",
+						"6100d3d285d8db001206bdad",
+						"getChapter"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addChapter",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE5NzYxNCwiZXhwIjoxNjI3ODAyNDE0fQ.l8QLv4O5jwu32S6wV-YLUNS3O5DCgt0IwE5Hg9atU9I",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"indx\": 1,\n    \"chapterName\": \"The is another confirmation test\",\n    \"chapterDesc\": \"This is the chapter description\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/board/boardId/60ff08c1156c7884029a909b/classId/60ff08cc156c7884029a909c/subjectId/60ff0906156c7884029a909d/addChapter",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"boardId",
+						"60ff08c1156c7884029a909b",
+						"classId",
+						"60ff08cc156c7884029a909c",
+						"subjectId",
+						"60ff0906156c7884029a909d",
+						"addChapter"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "modifyChapter",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE5NzYxNCwiZXhwIjoxNjI3ODAyNDE0fQ.l8QLv4O5jwu32S6wV-YLUNS3O5DCgt0IwE5Hg9atU9I",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"indx\": 333,\n    \"chapterName\": \"abababababa\",\n    \"chapterDesc\": \"dgdgdgdgdg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/board/boardId/60ff08c1156c7884029a909b/classId/60ff08cc156c7884029a909c/subjectId/60ff0906156c7884029a909d/chapterId/6100505ae3eac9d5905dff6a/modifyChapter",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"boardId",
+						"60ff08c1156c7884029a909b",
+						"classId",
+						"60ff08cc156c7884029a909c",
+						"subjectId",
+						"60ff0906156c7884029a909d",
+						"chapterId",
+						"6100505ae3eac9d5905dff6a",
+						"modifyChapter"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "removeChapter",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE5NzYxNCwiZXhwIjoxNjI3ODAyNDE0fQ.l8QLv4O5jwu32S6wV-YLUNS3O5DCgt0IwE5Hg9atU9I",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3001/board/boardId/60ff08c1156c7884029a909b/classId/60ff08cc156c7884029a909c/subjectId/61006745cd2041df82cef3f3/chapterId/61006203e3eac9d5905dff6d/",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"boardId",
+						"60ff08c1156c7884029a909b",
+						"classId",
+						"60ff08cc156c7884029a909c",
+						"subjectId",
+						"61006745cd2041df82cef3f3",
+						"chapterId",
+						"61006203e3eac9d5905dff6d",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addMedia",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE5NzYxNCwiZXhwIjoxNjI3ODAyNDE0fQ.l8QLv4O5jwu32S6wV-YLUNS3O5DCgt0IwE5Hg9atU9I",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {  \n    \"indx\": 1,                     \n    \"name\": \"some other mmmmmedia for testing\",\n    \"author\": \"media author\",\n    \"aboutAuthor\": \"description about another author\",\n    \"language\": \"English\",\n    \"url\": \"http://someurl.com\",\n    \"mediaType\": \"Audio\"\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/board/boardId/60ff08c1156c7884029a909b/classId/60ff08cc156c7884029a909c/subjectId/60ff0906156c7884029a909d/chapterId/60ff09be156c7884029a909f/addMedia",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"boardId",
+						"60ff08c1156c7884029a909b",
+						"classId",
+						"60ff08cc156c7884029a909c",
+						"subjectId",
+						"60ff0906156c7884029a909d",
+						"chapterId",
+						"60ff09be156c7884029a909f",
+						"addMedia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "modifyMedia",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE5NzYxNCwiZXhwIjoxNjI3ODAyNDE0fQ.l8QLv4O5jwu32S6wV-YLUNS3O5DCgt0IwE5Hg9atU9I",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {  \n    \"indx\": 999999,                     \n    \"name\": \"some other mmmmmedia for testing\",\n    \"author\": \"media author\",\n    \"aboutAuthor\": \"description about another author\",\n    \"language\": \"English\",\n    \"url\": \"http://someurl.com\",\n    \"mediaType\": \"Audio\"\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/board/boardId/60ff08c1156c7884029a909b/classId/60ff08cc156c7884029a909c/subjectId/60ff0906156c7884029a909d/chapterId/60ff09be156c7884029a909f/mediaId/60ff276d31147e8f6b6b0a05/modifyMedia",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"boardId",
+						"60ff08c1156c7884029a909b",
+						"classId",
+						"60ff08cc156c7884029a909c",
+						"subjectId",
+						"60ff0906156c7884029a909d",
+						"chapterId",
+						"60ff09be156c7884029a909f",
+						"mediaId",
+						"60ff276d31147e8f6b6b0a05",
+						"modifyMedia"
+					]
+				},
+				"description": "Modify Media"
+			},
+			"response": []
+		},
+		{
+			"name": "removeMedia",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE5NzYxNCwiZXhwIjoxNjI3ODAyNDE0fQ.l8QLv4O5jwu32S6wV-YLUNS3O5DCgt0IwE5Hg9atU9I",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3001/board/boardId/60ff08c1156c7884029a909b/classId/60ff08cc156c7884029a909c/subjectId/61006745cd2041df82cef3f3/chapterId/61006203e3eac9d5905dff6d/mediaId/61005091e3eac9d5905dff6c",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"boardId",
+						"60ff08c1156c7884029a909b",
+						"classId",
+						"60ff08cc156c7884029a909c",
+						"subjectId",
+						"61006745cd2041df82cef3f3",
+						"chapterId",
+						"61006203e3eac9d5905dff6d",
+						"mediaId",
+						"61005091e3eac9d5905dff6c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getQuestion",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE5NzYxNCwiZXhwIjoxNjI3ODAyNDE0fQ.l8QLv4O5jwu32S6wV-YLUNS3O5DCgt0IwE5Hg9atU9I",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3001/board/boardId/6100d29c85d8db001206bda1/classId/6100e79070954d0fc6e459db/subjectId/6100d33885d8db001206bda8/chapterId/6100d3d285d8db001206bdad/questionId/61022e296e27e637b4216c81/getQuestion",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"boardId",
+						"6100d29c85d8db001206bda1",
+						"classId",
+						"6100e79070954d0fc6e459db",
+						"subjectId",
+						"6100d33885d8db001206bda8",
+						"chapterId",
+						"6100d3d285d8db001206bdad",
+						"questionId",
+						"61022e296e27e637b4216c81",
+						"getQuestion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addQuestion",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE5NzYxNCwiZXhwIjoxNjI3ODAyNDE0fQ.l8QLv4O5jwu32S6wV-YLUNS3O5DCgt0IwE5Hg9atU9I",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"indx\": 100,\n    \"description\": \"this is a question about that topic\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/board/boardId/60ff08c1156c7884029a909b/classId/60ff08cc156c7884029a909c/subjectId/61006745cd2041df82cef3f3/chapterId/61006203e3eac9d5905dff6d/addQuestion",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"boardId",
+						"60ff08c1156c7884029a909b",
+						"classId",
+						"60ff08cc156c7884029a909c",
+						"subjectId",
+						"61006745cd2041df82cef3f3",
+						"chapterId",
+						"61006203e3eac9d5905dff6d",
+						"addQuestion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "removeQuestion",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE5NzYxNCwiZXhwIjoxNjI3ODAyNDE0fQ.l8QLv4O5jwu32S6wV-YLUNS3O5DCgt0IwE5Hg9atU9I",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3001/board/boardId/60ff08c1156c7884029a909b/classId/60ff08cc156c7884029a909c/subjectId/61006745cd2041df82cef3f3/chapterId/61006203e3eac9d5905dff6d/questionId/6100781f8bcc4de7651ca4ea",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"boardId",
+						"60ff08c1156c7884029a909b",
+						"classId",
+						"60ff08cc156c7884029a909c",
+						"subjectId",
+						"61006745cd2041df82cef3f3",
+						"chapterId",
+						"61006203e3eac9d5905dff6d",
+						"questionId",
+						"6100781f8bcc4de7651ca4ea"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
