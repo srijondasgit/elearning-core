@@ -337,6 +337,13 @@ router.delete('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId
     }
 })
 
+//get chapter details using boardid, classid, subject, chapter
+router.get('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/getChapter', verify, checkRole(['Admin']), async (req, res) => {
+    const boardInstance = await board.findById({ "_id": req.params.boardId})
+    const chapterInstance= boardInstance.class.id(req.params.classId).subjects.id(req.params.subjectId).chapter.id(req.params.chapterId)
+        
+    return res.json(chapterInstance);
+});
 
 //add media to board, class, subject, chapter
 router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/addMedia', verify, checkRole(['Admin']), async (req, res) => {
