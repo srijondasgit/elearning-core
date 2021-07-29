@@ -439,6 +439,13 @@ router.delete('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId
     }
 })
 
+//get questions using boardid, classid, subject, chapter, questions
+router.get('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/questionId/:questionId/getQuestion', verify, checkRole(['Admin']), async (req, res) => {
+    const boardInstance = await board.findById({ "_id": req.params.boardId})
+    const questionInstance= boardInstance.class.id(req.params.classId).subjects.id(req.params.subjectId).chapter.id(req.params.chapterId).questions.id(req.params.questionId)
+        
+    return res.json(questionInstance);
+});
 
 //add questions to board, class, subject, chapter
 router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/addQuestion', verify, checkRole(['Admin']), async (req, res) => {
