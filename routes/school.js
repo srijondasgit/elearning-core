@@ -29,6 +29,8 @@ router.post('/createSchool', verify, checkRole(['SchoolAdmin']), async (req, res
     const schoolInstance = new School({
         indx: req.body.indx,
         schoolName: req.body.schoolName,
+        schoolLocation: req.body.schoolLocation,
+        schoolAddress: req.body.schoolAddress,
         schoolDescription: req.body.schoolDescription,
         boardassigned: req.body.boardassigned,
         customboard: req.body.customboard,
@@ -75,6 +77,8 @@ router.patch('/schoolId/:schoolId/', verify, checkRole(['SchoolAdmin']), async (
                 {
                     indx: req.body.indx,
                     schoolName: req.body.schoolName,
+                    schoolLocation: req.body.schoolLocation,
+                    schoolAddress: req.body.schoolAddress,
                     schoolDescription: req.body.schoolDescription,
                     boardassigned: req.body.boardassigned,
                     customboard: req.body.customboard,
@@ -97,6 +101,8 @@ router.patch('/schoolId/:schoolId/updateStatus', verify, checkRole(['Admin']), a
         const findSchool= await School.findById({"_id": req.params.schoolId});
         const curr_indx = findSchool.indx
         const curr_schoolName = findSchool.schoolName
+        const curr_schoolLocation = findSchool.schoolLocation
+        const curr_schoolAddress = findSchool.schoolAddress
         const curr_schoolDescription = findSchool.schoolDescription
         const curr_boardassigned = findSchool.boardassigned
         const curr_customboard = findSchool.customboard
@@ -109,6 +115,8 @@ router.patch('/schoolId/:schoolId/updateStatus', verify, checkRole(['Admin']), a
                 {
                     indx: curr_indx,
                     schoolName: curr_schoolName,
+                    schoolLocation: curr_schoolLocation,
+                    schoolAddress: curr_schoolAddress,
                     schoolDescription: curr_schoolDescription,
                     boardassigned: curr_boardassigned,
                     customboard: curr_customboard,
@@ -137,5 +145,6 @@ router.delete('/schoolId/:schoolId/', verify, checkRole(['SchoolAdmin','Admin'])
 
 module.exports = router;
 
+//
 
 

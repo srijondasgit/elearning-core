@@ -11,6 +11,14 @@ const SchoolSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    schoolLocation: {
+        type: String,
+        required: true
+    },
+    schoolAddress: {
+        type: String,
+        required: true
+    },
     schoolDescription: {
         type: String,
         required: true
