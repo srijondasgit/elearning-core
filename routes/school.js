@@ -127,9 +127,20 @@ router.patch('/schoolId/:schoolId/updateStatus', verify, checkRole(['Admin']), a
 })
 
 
+//delete school
+router.delete('/schoolId/:schoolId/', verify, checkRole(['SchoolAdmin','Admin']), async (req, res) => {
+    try{
+        const deleteSchool= await School.findByIdAndDelete({"_id": req.params.schoolId});
+        return res.json(deleteSchool)
+    } catch (err){
+      return res.json({ message: err})
+    }
+})
+
+
 module.exports = router;
 
-//approve school
+
 //delete school
 
 
