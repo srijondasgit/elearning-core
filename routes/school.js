@@ -141,6 +141,4 @@ router.delete('/schoolId/:schoolId/', verify, checkRole(['SchoolAdmin','Admin'])
 module.exports = router;
 
 
-//delete school
-
 
