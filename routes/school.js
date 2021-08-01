@@ -27,7 +27,6 @@ router.get('/getAllSchools', async (req, res) => {
 
 //create school
 router.post('/createSchool', verify, checkRole(['SchoolAdmin']), async (req, res) => {
-
     const schoolInstance = new School({
         indx: req.body.indx,
         schoolName: req.body.schoolName,
@@ -55,11 +54,82 @@ router.post('/createSchool', verify, checkRole(['SchoolAdmin']), async (req, res
     }
 });
 
+//get school by schoolId
+router.get('/schoolId/:schoolId/', async (req, res) => {
+    try{
+        const schoolInstance = await School.findOne({  _id: req.params.schoolId }).populate('boardassigned customboard')
+        return res.json(schoolInstance);
+    } catch (err){
+    return res.json({ message: err})
+    }
+});
+
+//update school
+router.patch('/schoolId/:schoolId/', verify, checkRole(['SchoolAdmin']), async (req, res) => {
+    try{
+        const findSchool= await School.findById({"_id": req.params.schoolId});
+        const curr_schoolstatus = findSchool.status
+
+        const updateSchool = await School.findOneAndUpdate(
+            { "_id": req.params.schoolId}, 
+            {$set: 
+                {
+                    indx: req.body.indx,
+                    schoolName: req.body.schoolName,
+                    schoolDescription: req.body.schoolDescription,
+                    boardassigned: req.body.boardassigned,
+                    customboard: req.body.customboard,
+                    governmentId: req.body.governmentId,
+                    status: curr_schoolstatus
+                }
+            }
+        ); 
+ 
+
+        return res.json(updateSchool)
+    } catch (err){
+      return res.json({ message: err})
+    }
+})
+
+//update school status
+router.patch('/schoolId/:schoolId/updateStatus', verify, checkRole(['Admin']), async (req, res) => {
+    try{
+        const findSchool= await School.findById({"_id": req.params.schoolId});
+        const curr_indx = findSchool.indx
+        const curr_schoolName = findSchool.schoolName
+        const curr_schoolDescription = findSchool.schoolDescription
+        const curr_boardassigned = findSchool.boardassigned
+        const curr_customboard = findSchool.customboard
+        const curr_governmentId = findSchool.governmentId
+
+
+        const updateSchool = await School.findOneAndUpdate(
+            { "_id": req.params.schoolId}, 
+            {$set: 
+                {
+                    indx: curr_indx,
+                    schoolName: curr_schoolName,
+                    schoolDescription: curr_schoolDescription,
+                    boardassigned: curr_boardassigned,
+                    customboard: curr_customboard,
+                    governmentId: curr_governmentId,
+                    status: req.body.status
+                }
+            }
+        ); 
+ 
+
+        return res.json(updateSchool)
+    } catch (err){
+      return res.json({ message: err})
+    }
+})
+
 
 module.exports = router;
 
-//create school
-//update school
+//approve school
 //delete school
-//get school
+
 
