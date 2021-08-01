@@ -5,6 +5,7 @@ const board = require('../models/board.js')
 const { charityValidation } = require('../validation')
 const User = require('../models/User');
 const sendmail = require('../config/sendmail')
+const school = require('../models/school.js') 
 
 const checkRole = roles => async (req, res, next) => {
     const user = await User.findOne({ _id: req.user._id });
@@ -16,6 +17,13 @@ const checkRole = roles => async (req, res, next) => {
         success: false
     });
 }
+
+//get all schools
+// router.get('/getAllSchools', async (req, res) => {
+//     const schoolInstance = await school.find()
+//     const result = schoolInstance.map(a => ({"_id": a._id,"schoolName": a.schoolName}))
+//     return res.json(result);
+// });
 
 //get all boards
 router.get('/getAllBoards', verify, checkRole(['Admin']), async (req, res) => {

@@ -55,4 +55,7 @@ const BoardsSchema = mongoose.Schema({
     }]
 });
 
-module.exports = mongoose.model('Board', BoardsSchema);
+
+module.exports = BoardMatch = mongoose.model('Board', BoardsSchema);
+
+//export const BoardMatch = mongoose.model('Board', BoardsSchema);
