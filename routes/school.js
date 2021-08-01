@@ -33,6 +33,7 @@ router.post('/createSchool', verify, checkRole(['SchoolAdmin']), async (req, res
         schoolName: req.body.schoolName,
         schoolDescription: req.body.schoolDescription,
         boardassigned: req.body.boardassigned,
+        customboard: req.body.customboard,
         governmentId: req.body.governmentId,
         status: "Created"
     });
@@ -40,7 +41,7 @@ router.post('/createSchool', verify, checkRole(['SchoolAdmin']), async (req, res
     try{
         const savedSchool = await schoolInstance.save().then(result => {
             School
-               .populate(schoolInstance, { path: "boardassigned"})
+               .populate(schoolInstance, { path: "boardassigned customboard"})
                .then(school => {
                   res.json({
                      message: "Board added",
@@ -56,3 +57,9 @@ router.post('/createSchool', verify, checkRole(['SchoolAdmin']), async (req, res
 
 
 module.exports = router;
+
+//create school
+//update school
+//delete school
+//get school
+
