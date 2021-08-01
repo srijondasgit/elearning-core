@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const verify = require('./verifyToken') 
 const board = require('../models/board.js') 
-const { charityValidation } = require('../validation')
 const User = require('../models/User');
 const sendmail = require('../config/sendmail')
 const School = require('../models/school.js') 
@@ -117,9 +116,7 @@ router.patch('/schoolId/:schoolId/updateStatus', verify, checkRole(['Admin']), a
                     status: req.body.status
                 }
             }
-        ); 
- 
-
+        );
         return res.json(updateSchool)
     } catch (err){
       return res.json({ message: err})
