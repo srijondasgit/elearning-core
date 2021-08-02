@@ -32,7 +32,8 @@ const SchoolSchema = mongoose.Schema({
         type: String,
         default: "Created",
         enum: ["Created","Approved","Hold","Removed"]
-    }
+    },
+    shortCode: String
 });
 
 module.exports = mongoose.model("School", SchoolSchema);

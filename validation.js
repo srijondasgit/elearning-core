@@ -21,4 +21,16 @@ const registerValidation = data => {
     return schema.validate(data);
 };
 
+const shCodeValidation = data => {
+    const schema = Joi.object({
+        shortCode: Joi.string()
+            .min(8)
+            .max(8)
+            .required()
+    });   
+    return schema.validate(data);
+};
+
+
 module.exports.registerValidation = registerValidation;
+module.exports.shCodeValidation = shCodeValidation;

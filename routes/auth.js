@@ -3,7 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose');
 const User = require('../models/User');
-const { registerValidation, loginValidation } = require('../validation')
+const { registerValidation } = require('../validation')
 const bcrypt = require('bcryptjs');
 const sendmail = require('../config/sendmail')
 
