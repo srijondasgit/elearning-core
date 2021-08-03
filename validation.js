@@ -26,6 +26,7 @@ const shCodeValidation = data => {
         shortCode: Joi.string()
             .min(8)
             .max(8)
+            .alphanum()
             .required()
     });   
     return schema.validate(data);
