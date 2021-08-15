@@ -26,7 +26,7 @@ const checkRole = roles => async (req, res, next) => {
 // });
 
 //get all boards
-router.get('/getAllBoards', verify, checkRole(['Admin']), async (req, res) => {
+router.get('/getAllBoards', async (req, res) => {
     const boardInstance = await board.find()
     const result = boardInstance.map(a => ({"_id": a._id,"boardName": a.boardName}))
     return res.json(result);

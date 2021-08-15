@@ -4,7 +4,8 @@
   "description": "elearning core module",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "test": "mocha"
   },
   "author": "",
   "license": "ISC",
@@ -27,5 +28,10 @@
   "bugs": {
     "url": "https://github.com/srijondasgit/elearning-core/issues"
   },
-  "homepage": "https://github.com/srijondasgit/elearning-core#readme"
+  "homepage": "https://github.com/srijondasgit/elearning-core#readme",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "mocha": "^9.0.3"
+  }
 }
