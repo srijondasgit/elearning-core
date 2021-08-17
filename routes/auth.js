@@ -50,6 +50,32 @@ router.post('/register', async (req,res) => {
     sendmail(req.body.email,"Verify email","Please use this activation code to verify your account : "+activationcode)
 })
 
+router.delete('/register', async (req,res) => {
+
+    //Validation
+    const { error } = registerValidation(req.body);
+    if(error) return res.status(400).send(error.details[0].message);
+
+    //Check if user exists
+    const user = await User.findOne({  email: req.body.email })
+    if(!user) return res.status(400).send('Email does not exist')
+
+    const validPass = await bcrypt.compare(req.body.password, user.password);
+
+    if(!validPass) return res.status(400).send('Invalid Password');
+
+
+    try{  
+        const updateUser = await User.deleteOne(
+            { email: req.body.email }
+        );
+        return res.json(updateUser)
+      } catch (err){
+        return res.json({ message: err})
+      }  
+
+})
+
 router.post('/verify', async (req,res) => {
 
     //Check if email exists
