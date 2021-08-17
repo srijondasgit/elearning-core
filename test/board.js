@@ -28,7 +28,7 @@ describe ('Tasks Api' , () => {
             chai.request('localhost:3001')
                 .post("/auth/register")
                 .set('Content-Type', 'application/json')
-                .send({"name":"testuser", "role": "SchoolAdmin", "email": "testuser234@testuser.com", "password": "Pass123word"
+                .send({"name":"testuser", "role": "Admin", "email": "testuser456@testuser.com", "password": "Pass123word"
                 })
                 .end((err, response) => {
                     currentResponse = response;
@@ -40,14 +40,12 @@ describe ('Tasks Api' , () => {
     });
 
 
-
-
     describe("delete /auth/register", () => {
         it("It should delete a user with SchoolAdmin role", (done) => {
             chai.request('localhost:3001')
                 .delete("/auth/register")
                 .set('Content-Type', 'application/json')
-                .send({"name":"testuser", "role": "SchoolAdmin", "email": "testuser234@testuser.com", "password": "Pass123word"
+                .send({"name":"testuser", "role": "Admin", "email": "testuser456@testuser.com", "password": "Pass123word"
                 })
                 .end((err, response) => {
                     currentResponse = response;

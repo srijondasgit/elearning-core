@@ -30,6 +30,9 @@ router.post('/register', async (req,res) => {
     //Create activation code
     activationcode = Math.floor(Math.random() * (8888) + 1111)
 
+    // If environment is Automated testing then set activation code to 1000
+    if(process.env.ENVIRONMENT == "AutoTesting") activationcode = 1000
+
     //Create new user
     const user = new User({
         name: req.body.name,
