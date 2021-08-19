@@ -114,7 +114,9 @@ router.patch('/boardId/:boardId/addClass', verify, checkRole(['Admin']), async (
             }
         });
 
-        return res.json(updateBoard)
+        const newBoard = await board.findOne({ _id: req.params.boardId})
+        
+        return res.json(newBoard.class[newBoard.class.length - 1]._id)
     } catch (err){
       return res.json({ message: err})
     }
@@ -176,7 +178,7 @@ router.get('/boardId/:boardId/classId/:classId/getClass', verify, checkRole(['Ad
 //add subject to board, class
 router.patch('/boardId/:boardId/classId/:classId/addSubject', verify, checkRole(['Admin']), async (req, res) => {
     try{
-        const updateBoard = await board.update(
+        const updateBoard = await board.updateOne(
             { 
                 "_id": req.params.boardId, 
                 "class._id": req.params.classId
@@ -192,7 +194,11 @@ router.patch('/boardId/:boardId/classId/:classId/addSubject', verify, checkRole(
             }
         ); 
 
-        return res.json(updateBoard)
+        const newBoard = await board.findOne({ _id: req.params.boardId})
+        const result = newBoard.class.id(req.params.classId).subjects[newBoard.class.id(req.params.classId).subjects.length -1]._id
+
+        return res.json(result)
+
     } catch (err){
       return res.json({ message: err})
     }

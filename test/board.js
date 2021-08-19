@@ -2,13 +2,11 @@ let chai = require("chai");
 let chaiHttp = require("chai-http")
 let server = require("../app.js")
 
-
-//Assertion style 
 chai.should();
 
 chai.use(chaiHttp);
 
-describe ('Auth Api testing' , () => {
+describe ('Board Api testing' , () => {
 
     describe("post /auth/register", () => {
         it("It should create a user with SchoolAdmin role", (done) => {
@@ -67,6 +65,68 @@ describe ('Auth Api testing' , () => {
                     boardId = response.body._id;
                     response.should.have.status(200);
                     console.log(boardId)
+                done();
+                });
+        });
+    });
+
+    describe("create class /board/boardId/:boardId/addClass", () => {
+        it("It should create a class", (done) => {
+            chai.request('localhost:3001')
+                .patch("/board/boardId/"+boardId+"/addClass")
+                .set('Content-Type', 'application/json')
+                .set('auth-token', jwtToken)
+                .send({ "indx": 1, "description": "Class 10"})
+                .end((err, response) => {
+                    classId = response.body;
+                    response.should.have.status(200);
+                    console.log(classId)
+                done();
+                });
+        });
+    });
+
+    describe("create another class /board/boardId/:boardId/addClass", () => {
+        it("It should create another class", (done) => {
+            chai.request('localhost:3001')
+                .patch("/board/boardId/"+boardId+"/addClass")
+                .set('Content-Type', 'application/json')
+                .set('auth-token', jwtToken)
+                .send({ "indx": 2, "description": "Class 9"})
+                .end((err, response) => {
+                    classId = response.body;
+                    response.should.have.status(200);
+                    console.log(classId)
+                done();
+                });
+        });
+    });
+
+    describe("get class details using board and classid", () => {
+        it("It should get the class", (done) => {
+            chai.request('localhost:3001')
+                .get("/board/boardId/"+boardId+"/classId/"+classId+"/getClass")
+                .set('Content-Type', 'application/json')
+                .set('auth-token', jwtToken)
+                .send()
+                .end((err, response) => {
+                    response.should.have.status(200);
+                    console.log(response.body)
+                done();
+                });
+        });
+    });
+
+    describe("add subject using board and classid /boardId/:boardId/classId/:classId/addSubject", () => {
+        it("It should add a subject to a class", (done) => {
+            chai.request('localhost:3001')
+                .patch("/board/boardId/"+boardId+"/classId/"+classId+"/addSubject")
+                .set('Content-Type', 'application/json')
+                .set('auth-token', jwtToken)
+                .send({"indx": 1, "subjectName": "Social Science"})
+                .end((err, response) => {
+                    response.should.have.status(200);
+                    console.log(response.body)
                 done();
                 });
         });
