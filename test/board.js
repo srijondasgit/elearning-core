@@ -6,6 +6,7 @@ chai.should();
 
 chai.use(chaiHttp);
 
+//This is testing code for core functionality
 describe ('Board Api testing' , () => {
 
     describe("post /auth/register", () => {
