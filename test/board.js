@@ -118,6 +118,24 @@ describe ('Board Api testing' , () => {
         });
     });
 
+    
+   
+    describe("modify a board /board/boardId/:boardId/modifyBoard", () => {
+        it("It should modify bord details of a board", (done) => {
+            chai.request('localhost:3001')
+                .patch("/board/boardId/"+boardId+"/modifyBoard/")
+                .set('Content-Type', 'application/json')
+                .set('auth-token', jwtToken)
+                .send({"indx": 1, "boardName": "()", "boardDescription": "()", "governmentId": "some gvt id", "boardVersion": "()"})
+                .end((err, response) => {
+                    boardId = response.body._id;
+                    response.should.have.status(200);
+                    console.log(boardId)
+                done();
+                });
+        });
+    });
+
     describe("get Board details using boardId", () => {
         it("It should get the Board for a boardId", (done) => {
             chai.request('localhost:3001')
