@@ -42,6 +42,20 @@ describe ('Board Api testing' , () => {
         });
     });
 
+    describe("post /auth/verify", () => {
+        it("It should verify a user with User role by the passcode", (done) => {
+            chai.request('localhost:3001')
+                .post("/auth/verify")
+                .set('Content-Type', 'application/json')
+                .send({"email": "testuser230@testuser.com", "activationcode": "1000"})
+                .end((err, response) => {
+                    currentResponse = response;
+                    response.should.have.status(200);
+                done();
+                });
+        });
+    });
+
 
     describe("delete /auth/register", () => {
         it("It should delete a user with User role", (done) => {
