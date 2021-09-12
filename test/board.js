@@ -118,6 +118,22 @@ describe ('Board Api testing' , () => {
         });
     });
 
+    describe("get Board details using boardId", () => {
+        it("It should get the Board for a boardId", (done) => {
+            chai.request('localhost:3001')
+                .get("/board/boardId/"+boardId+"/getBoard")
+                .set('Content-Type', 'application/json')
+                .set('auth-token', jwtToken)
+                .send()
+                .end((err, response) => {
+                    response.should.have.status(200);
+                    console.log(response.body)
+                done();
+                });
+        });
+    });
+
+
     describe("create class /board/boardId/:boardId/addClass", () => {
         it("It should create a class", (done) => {
             chai.request('localhost:3001')
