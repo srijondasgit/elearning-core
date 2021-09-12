@@ -10,7 +10,7 @@ chai.use(chaiHttp);
 describe ('Board Api testing' , () => {
 
     describe("post /auth/register", () => {
-        it("It should create a user with SchoolAdmin role", (done) => {
+        it("It should create a user with Admin role", (done) => {
             chai.request('localhost:3001')
                 .post("/auth/register")
                 .set('Content-Type', 'application/json')
@@ -20,6 +20,39 @@ describe ('Board Api testing' , () => {
                     currentResponse = response;
                     response.should.have.status(200);
                     response.should.be.json
+                done();
+                });
+        });
+    });
+    
+    
+    describe("post /auth/register", () => {
+        it("It should create a user with User role", (done) => {
+            chai.request('localhost:3001')
+                .post("/auth/register")
+                .set('Content-Type', 'application/json')
+                .send({"name":"testuser", "role": "User", "email": "testuser230@testuser.com", "password": "Pass123word"
+                })
+                .end((err, response) => {
+                    currentResponse = response;
+                    response.should.have.status(200);
+                    response.should.be.json
+                done();
+                });
+        });
+    });
+
+
+    describe("delete /auth/register", () => {
+        it("It should delete a user with User role", (done) => {
+            chai.request('localhost:3001')
+                .delete("/auth/register")
+                .set('Content-Type', 'application/json')
+                .send({"name":"testuser", "role": "User", "email": "testuser230@testuser.com", "password": "Pass123word"
+                })
+                .end((err, response) => {
+                    response.should.have.status(200);
+                    response.should.be.json;
                 done();
                 });
         });
