@@ -150,6 +150,7 @@ describe ('Board Api testing' , () => {
         });
     });
 
+
     describe("create another class /board/boardId/:boardId/addClass", () => {
         it("It should create another class", (done) => {
             chai.request('localhost:3001')
@@ -165,11 +166,29 @@ describe ('Board Api testing' , () => {
                 });
         });
     });
-
-    describe("get class details using board and classid", () => {
-        it("It should get the class", (done) => {
+  
+  
+    describe("add subject using board and classid /boardId/:boardId/classId/:classId/addSubject", () => {
+        it("It should add a subject to a class", (done) => {
             chai.request('localhost:3001')
-                .get("/board/boardId/"+boardId+"/classId/"+classId+"/getClass")
+                .patch("/board/boardId/"+boardId+"/classId/"+classId+"/addSubject")
+                .set('Content-Type', 'application/json')
+                .set('auth-token', jwtToken)
+                .send({"indx": 1, "subjectName": "Social Science"})
+                .end((err, response) => {
+                    response.should.have.status(200);
+                    subjectId = response.body;
+                    console.log(response.body)
+                done();
+                });
+        });
+    });
+    
+    
+    describe("get class details using boardId", () => {
+        it("It should get the Board for a boardId", (done) => {
+            chai.request('localhost:3001')
+                .get("/board/boardId/"+boardId+"/getBoard")
                 .set('Content-Type', 'application/json')
                 .set('auth-token', jwtToken)
                 .send()
@@ -181,21 +200,43 @@ describe ('Board Api testing' , () => {
         });
     });
 
-    describe("add subject using board and classid /boardId/:boardId/classId/:classId/addSubject", () => {
-        it("It should add a subject to a class", (done) => {
+
+    
+    describe("delete /subject", () => {
+        it("It should delete a subject from a class", (done) => {
             chai.request('localhost:3001')
-                .patch("/board/boardId/"+boardId+"/classId/"+classId+"/addSubject")
+                .delete("/board/boardid/"+boardId+"/classId/"+classId+"/subjectId/"+subjectId)
                 .set('Content-Type', 'application/json')
                 .set('auth-token', jwtToken)
-                .send({"indx": 1, "subjectName": "Social Science"})
+                .send()
                 .end((err, response) => {
+                    deleted = response
                     response.should.have.status(200);
-                    console.log(response.body)
+                    console.log("err : "+err);
+                    console.log("response : "+ JSON.stringify(JSON.parse(JSON.parse(JSON.stringify(response.text))).deletedCount));
                 done();
                 });
         });
     });
 
+    describe("delete /class", () => {
+        it("It should delete a class from a board", (done) => {
+            chai.request('localhost:3001')
+                .delete("/board/boardid/"+boardId+"/classId/"+classId)
+                .set('Content-Type', 'application/json')
+                .set('auth-token', jwtToken)
+                .send()
+                .end((err, response) => {
+                    deleted = response
+                    response.should.have.status(200);
+                    console.log("err : "+err);
+                    console.log("response : "+ JSON.stringify(JSON.parse(JSON.parse(JSON.stringify(response.text))).deletedCount));
+                done();
+                });
+        });
+    });
+
+    
     describe("delete /board/", () => {
         it("It should delete a board", (done) => {
             chai.request('localhost:3001')
