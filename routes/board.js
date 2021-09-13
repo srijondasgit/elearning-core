@@ -18,12 +18,15 @@ const checkRole = roles => async (req, res, next) => {
     });
 }
 
-//get all schools
-// router.get('/getAllSchools', async (req, res) => {
-//     const schoolInstance = await school.find()
-//     const result = schoolInstance.map(a => ({"_id": a._id,"schoolName": a.schoolName}))
-//     return res.json(result);
-// });
+//get one board by description
+router.post('/getOneBoardByDescription', async (req, res) => {
+    try{
+        const boardInstance = await board.findOne({  boardName: req.body.boardName })
+        return res.json(boardInstance._id);
+    } catch (err){
+    return res.json({ message: err})
+    }
+});
 
 //get all boards
 router.get('/getAllBoards', async (req, res) => {
