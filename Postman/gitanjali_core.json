@@ -34,6 +34,34 @@
 			"response": []
 		},
 		{
+			"name": "localhost:3001/auth/register delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"testuseronly\",\n    \"email\": \"testuser234@testuser.com\",\n    \"password\": \"password123\",\n    \"role\": \"SchoolAdmin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/auth/register",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "localhost:3001/auth/verify",
 			"request": {
 				"method": "POST",
@@ -904,6 +932,200 @@
 						"61006203e3eac9d5905dff6d",
 						"questionId",
 						"6100781f8bcc4de7651ca4ea"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "modifyQuestion",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGZjYzZkOTc4NTJjZTA5MzQzNWViN2MiLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTExQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyNzE5NzYxNCwiZXhwIjoxNjI3ODAyNDE0fQ.l8QLv4O5jwu32S6wV-YLUNS3O5DCgt0IwE5Hg9atU9I",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"indx\": 123,\n    \"description\": \"some other question\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/board/boardId/6100d29c85d8db001206bda1/classId/6100e79070954d0fc6e459db/subjectId/6100d33885d8db001206bda8/chapterId/6100d3d285d8db001206bdad/questionId/61022e296e27e637b4216c81/modifyQuestion",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"boardId",
+						"6100d29c85d8db001206bda1",
+						"classId",
+						"6100e79070954d0fc6e459db",
+						"subjectId",
+						"6100d33885d8db001206bda8",
+						"chapterId",
+						"6100d3d285d8db001206bdad",
+						"questionId",
+						"61022e296e27e637b4216c81",
+						"modifyQuestion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllSchools",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3001/school/getAllSchools",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"school",
+						"getAllSchools"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createSchool",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTA1YWIwNmQyZWYzOTQyNWVkMGNkOTciLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTEyQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJTY2hvb2xBZG1pbiIsImlhdCI6MTYyNzc2MTQ2NCwiZXhwIjoxNjI4MzY2MjY0fQ.u_X7BOm81lv8jGKJzMeyxWWTemL-pwSGYHVyHH_1g7I",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{       \n    \"indx\": 1,\n    \"schoolName\": \"this is some school name\",\n    \"schoolDescription\": \"this is school description\",\n    \"boardassigned\": \"60fde2685fdcac42a669ebee\",\n    \"customboard\": \"60fe16194458905af9ab610f\",\n    \"governmentId\": \"some government id\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/school/createSchool",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"school",
+						"createSchool"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateSchool",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTA1YWIwNmQyZWYzOTQyNWVkMGNkOTciLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTEyQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJTY2hvb2xBZG1pbiIsImlhdCI6MTYyNzc2MTQ2NCwiZXhwIjoxNjI4MzY2MjY0fQ.u_X7BOm81lv8jGKJzMeyxWWTemL-pwSGYHVyHH_1g7I",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{       \n    \"indx\": 112,\n    \"schoolName\": \"this is some school name\",\n    \"schoolDescription\": \"this is school description\",\n    \"boardassigned\": \"60fde2685fdcac42a669ebee\",\n    \"customboard\": \"60fe16194458905af9ab610f\",\n    \"governmentId\": \"some government id\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/school/schoolId/610635b22c13fa677e406133",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"school",
+						"schoolId",
+						"610635b22c13fa677e406133"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteSchool",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTA1YWIwNmQyZWYzOTQyNWVkMGNkOTciLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTEyQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJTY2hvb2xBZG1pbiIsImlhdCI6MTYyNzc2MTQ2NCwiZXhwIjoxNjI4MzY2MjY0fQ.u_X7BOm81lv8jGKJzMeyxWWTemL-pwSGYHVyHH_1g7I",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3001/school/schoolId/610635b22c13fa677e406133",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"school",
+						"schoolId",
+						"610635b22c13fa677e406133"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createShCode",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTA1YWIwNmQyZWYzOTQyNWVkMGNkOTciLCJuYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3R1c2VyMTEyQHRlc3R1c2VyLmNvbSIsInJvbGUiOiJTY2hvb2xBZG1pbiIsImlhdCI6MTYyNzc2MTQ2NCwiZXhwIjoxNjI4MzY2MjY0fQ.u_X7BOm81lv8jGKJzMeyxWWTemL-pwSGYHVyHH_1g7I",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"shortCode\": \"abcdefgk\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/school/schoolId/610636504acacb67e4613aa1/createShCode",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"school",
+						"schoolId",
+						"610636504acacb67e4613aa1",
+						"createShCode"
 					]
 				}
 			},
