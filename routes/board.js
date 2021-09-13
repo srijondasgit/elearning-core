@@ -487,7 +487,11 @@ router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/
                             {"e3._id": req.params.chapterId}]}
         ); 
 
-        return res.json(updateBoard)
+        const newBoard = await board.findOne({ _id: req.params.boardId})
+        leng = newBoard.class.id(req.params.classId).subjects.id(req.params.subjectId).chapter.id(req.params.chapterId).questions.length
+        const result = newBoard.class.id(req.params.classId).subjects.id(req.params.subjectId).chapter.id(req.params.chapterId).questions[leng - 1]._id
+
+        return res.json(result)
     } catch (err){
       return res.json({ message: err})
     }
