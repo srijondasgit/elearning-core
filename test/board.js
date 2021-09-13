@@ -185,6 +185,24 @@ describe ('Board Api testing' , () => {
         });
     });
   
+    
+
+    describe("modify a class /board/boardId/:boardId/classId/:classId/modifyClass", () => {
+        it("It should modify class details of a class", (done) => {
+            chai.request('localhost:3001')
+                .patch("/board/boardId/"+boardId+"/classId/"+classId+"/modifyClass/")
+                .set('Content-Type', 'application/json')
+                .set('auth-token', jwtToken)
+                .send({ "indx": 0, "description": ""})
+                .end((err, response) => {
+                    boardId = response.body._id;
+                    response.should.have.status(200);
+                    console.log(boardId)
+                done();
+                });
+        });
+    });
+
   
     describe("add subject using board and classid /boardId/:boardId/classId/:classId/addSubject", () => {
         it("It should add a subject to a class", (done) => {
