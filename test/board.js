@@ -221,6 +221,24 @@ describe ('Board Api testing' , () => {
     });
     
     
+
+    describe("modify a subject /board/boardId/:boardId/classId/:classId/subjectId/:subjectId/modifySubject", () => {
+        it("It should modify subject of a class", (done) => {
+            chai.request('localhost:3001')
+                .patch("/board/boardId/"+boardId+"/classId/"+classId+"/subjectId/"+subjectId+"/modifySubject/")
+                .set('Content-Type', 'application/json')
+                .set('auth-token', jwtToken)
+                .send({ "indx": 0, "description": "this is new update of subject"})
+                .end((err, response) => {
+                    boardId = response.body._id;
+                    response.should.have.status(200);
+                    console.log(boardId)
+                done();
+                });
+        });
+    });
+
+
     describe("get class details using boardId", () => {
         it("It should get the Board for a boardId", (done) => {
             chai.request('localhost:3001')
