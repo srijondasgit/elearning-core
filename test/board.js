@@ -126,7 +126,7 @@ describe ('Board Api testing' , () => {
                 .patch("/board/boardId/"+boardId+"/modifyBoard/")
                 .set('Content-Type', 'application/json')
                 .set('auth-token', jwtToken)
-                .send({"indx": 1, "boardName": "()", "boardDescription": "()", "governmentId": "some gvt id", "boardVersion": "()"})
+                .send({"indx": 1, "boardName": "new board", "boardDescription": "updated board description", "governmentId": "some gvt id", "boardVersion": "2021.09.13"})
                 .end((err, response) => {
                     boardId = response.body._id;
                     response.should.have.status(200);
@@ -193,7 +193,7 @@ describe ('Board Api testing' , () => {
                 .patch("/board/boardId/"+boardId+"/classId/"+classId+"/modifyClass/")
                 .set('Content-Type', 'application/json')
                 .set('auth-token', jwtToken)
-                .send({ "indx": 0, "description": ""})
+                .send({ "indx": 0, "description": "this is an updated class"})
                 .end((err, response) => {
                     boardId = response.body._id;
                     response.should.have.status(200);
