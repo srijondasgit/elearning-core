@@ -221,7 +221,21 @@ describe ('Board Api testing' , () => {
     });
     
     
-
+    describe("add a chapter of a subject /boardId/:boardId/classId/:classId/subjectId/:subjectId/addChapter", () => {
+        it("It should add a chapter of a subject", (done) => {
+            chai.request('localhost:3001')
+                .patch("/board/boardId/"+boardId+"/classId/"+classId+"/subjectId/"+subjectId+"/addChapter/")
+                .set('Content-Type', 'application/json')
+                .set('auth-token', jwtToken)
+                .send({"indx": 1, "chapterName": "first chapter"})
+                .end((err, response) => {
+                    response.should.have.status(200);
+                    subjectId = response.body;
+                    console.log(response.body)
+                done();
+                });
+        });
+    });
     describe("modify a subject /board/boardId/:boardId/classId/:classId/subjectId/:subjectId/modifySubject", () => {
         it("It should modify subject of a class", (done) => {
             chai.request('localhost:3001')
