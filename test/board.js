@@ -230,7 +230,7 @@ describe ('Board Api testing' , () => {
                 .send({"indx": 1, "chapterName": "first chapter"})
                 .end((err, response) => {
                     response.should.have.status(200);
-                    subjectId = response.body;
+                    chapterId = response.body;
                     console.log(response.body)
                 done();
                 });
