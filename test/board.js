@@ -285,8 +285,8 @@ describe ('Board Api testing' , () => {
         });
     });
 
-
-    describe("modify a media /board/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/mediaId/:mediaId/modifyMedia", () => {
+ 
+   describe("modify a media /board/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/mediaId/:mediaId/modifyMedia", () => {
         it("It should modify media of a chapter", (done) => {
             chai.request('localhost:3001')
                 .patch("/board/boardId/"+boardId+"/classId/"+classId+"/subjectId/"+subjectId+"/chapterId/"+chapterId+"/mediaId/"+mediaId+"/modifyMedia/")
@@ -311,6 +311,20 @@ describe ('Board Api testing' , () => {
                     response.should.have.status(200);
                     QuestionId = response.body;
                     console.log(response.body)
+                done();
+                });
+        });
+    });
+
+    describe("modify a Question /board/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/QuestionId/:QuestionId/modifyQuestion", () => {
+        it("It should modify Question of a chapter", (done) => {
+            chai.request('localhost:3001')
+                .patch("/board/boardId/"+boardId+"/classId/"+classId+"/subjectId/"+subjectId+"/chapterId/"+chapterId+"/QuestionId/"+QuestionId+"/modifyQuestion/")
+                .set('Content-Type', 'application/json')
+                .set('auth-token', jwtToken)
+                .send({ "indx": 0, "description": "this is new update of Question"})
+                .end((err, response) => {
+                    response.should.have.status(200);
                 done();
                 });
         });
