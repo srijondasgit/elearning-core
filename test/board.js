@@ -236,6 +236,8 @@ describe ('Board Api testing' , () => {
                 });
         });
     });
+    
+    
     describe("modify a subject /board/boardId/:boardId/classId/:classId/subjectId/:subjectId/modifySubject", () => {
         it("It should modify subject of a class", (done) => {
             chai.request('localhost:3001')
@@ -247,6 +249,24 @@ describe ('Board Api testing' , () => {
                     boardId = response.body._id;
                     response.should.have.status(200);
                     console.log(boardId)
+                done();
+                });
+        });
+    });
+
+    
+    
+    describe("add a media to a chapter /boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/addMedia", () => {
+        it("It should add a media to a chapter", (done) => {
+            chai.request('localhost:3001')
+                .patch("/board/boardId/"+boardId+"/classId/"+classId+"/subjectId/"+subjectId+"/chapterId/"+chapterId+"/addMedia/")
+                .set('Content-Type', 'application/json')
+                .set('auth-token', jwtToken)
+                .send({"indx": 1, "chapterName": "first chapter"})
+                .end((err, response) => {
+                    response.should.have.status(200);
+                    mediaId = response.body;
+                    console.log(response.body)
                 done();
                 });
         });
