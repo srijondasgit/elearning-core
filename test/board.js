@@ -219,6 +219,21 @@ describe ('Board Api testing' , () => {
                 });
         });
     });
+
+    describe("modify a subject /board/boardId/:boardId/classId/:classId/subjectId/:subjectId/modifySubject", () => {
+        it("It should modify subject of a class", (done) => {
+            chai.request('localhost:3001')
+                .patch("/board/boardId/"+boardId+"/classId/"+classId+"/subjectId/"+subjectId+"/modifySubject/")
+                .set('Content-Type', 'application/json')
+                .set('auth-token', jwtToken)
+                .send({ "indx": 0, "description": "this is new update of subject"})
+                .end((err, response) => {
+                    response.should.have.status(200);
+                done();
+                });
+        });
+    });
+
     
     
     describe("add a chapter of a subject /boardId/:boardId/classId/:classId/subjectId/:subjectId/addChapter", () => {
@@ -237,23 +252,21 @@ describe ('Board Api testing' , () => {
         });
     });
     
-    
-    describe("modify a subject /board/boardId/:boardId/classId/:classId/subjectId/:subjectId/modifySubject", () => {
-        it("It should modify subject of a class", (done) => {
+    describe("modify a chapter /board/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/modifyChapter", () => {
+        it("It should modify chapter of a subject", (done) => {
             chai.request('localhost:3001')
-                .patch("/board/boardId/"+boardId+"/classId/"+classId+"/subjectId/"+subjectId+"/modifySubject/")
+                .patch("/board/boardId/"+boardId+"/classId/"+classId+"/subjectId/"+subjectId+"/chapterId/"+chapterId+"/modifyChapter/")
                 .set('Content-Type', 'application/json')
                 .set('auth-token', jwtToken)
-                .send({ "indx": 0, "description": "this is new update of subject"})
+                .send({ "indx": 0, "description": "this is new update of chapter"})
                 .end((err, response) => {
-                    boardId = response.body._id;
                     response.should.have.status(200);
-                    console.log(boardId)
                 done();
                 });
         });
     });
 
+   
     
     
     describe("add a media to a chapter /boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/addMedia", () => {
@@ -271,6 +284,9 @@ describe ('Board Api testing' , () => {
                 });
         });
     });
+
+
+    
 
     describe("add a Question to a chapter /boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/addQuestion", () => {
         it("It should add a Question to a chapter", (done) => {
