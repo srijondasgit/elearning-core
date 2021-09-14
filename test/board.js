@@ -286,7 +286,19 @@ describe ('Board Api testing' , () => {
     });
 
 
-    
+    describe("modify a media /board/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/mediaId/:mediaId/modifyMedia", () => {
+        it("It should modify media of a chapter", (done) => {
+            chai.request('localhost:3001')
+                .patch("/board/boardId/"+boardId+"/classId/"+classId+"/subjectId/"+subjectId+"/chapterId/"+chapterId+"/mediaId/"+mediaId+"/modifyMedia/")
+                .set('Content-Type', 'application/json')
+                .set('auth-token', jwtToken)
+                .send({ "indx": 0, "description": "this is new update of media"})
+                .end((err, response) => {
+                    response.should.have.status(200);
+                done();
+                });
+        });
+    });
 
     describe("add a Question to a chapter /boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/addQuestion", () => {
         it("It should add a Question to a chapter", (done) => {
