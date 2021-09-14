@@ -24,7 +24,7 @@ router.post('/getOneBoardByDescription', async (req, res) => {
         const boardInstance = await board.findOne({  boardName: req.body.boardName })
         return res.json(boardInstance._id);
     } catch (err){
-    return res.json({ message: err})
+    return res.json("No boardId found")
     }
 });
 
