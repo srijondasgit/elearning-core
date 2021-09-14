@@ -272,6 +272,21 @@ describe ('Board Api testing' , () => {
         });
     });
 
+    describe("add a Question to a chapter /boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/addQuestion", () => {
+        it("It should add a Question to a chapter", (done) => {
+            chai.request('localhost:3001')
+                .patch("/board/boardId/"+boardId+"/classId/"+classId+"/subjectId/"+subjectId+"/chapterId/"+chapterId+"/addQuestion/")
+                .set('Content-Type', 'application/json')
+                .set('auth-token', jwtToken)
+                .send({"indx": 1, "chapterName": "first chapter"})
+                .end((err, response) => {
+                    response.should.have.status(200);
+                    QuestionId = response.body;
+                    console.log(response.body)
+                done();
+                });
+        });
+    });
 
     describe("get class details using boardId", () => {
         it("It should get the Board for a boardId", (done) => {
