@@ -303,6 +303,25 @@ describe ('Board Api testing' , () => {
         });
     });
 
+
+    describe("delete /Question", () => {
+        it("It should delete a Question from a chapter", (done) => {
+            chai.request('localhost:3001')
+                .delete("/board/boardid/"+boardId+"/classId/"+classId+"/subjectId/"+subjectId+"/chapterId/"+chapterId+"/QuestionId/"+QuestionId)
+                .set('Content-Type', 'application/json')
+                .set('auth-token', jwtToken)
+                .send()
+                .end((err, response) => {
+                    deleted = response
+                    response.should.have.status(200);
+                    console.log("err : "+err);
+                    console.log("response : "+ JSON.stringify(JSON.parse(JSON.parse(JSON.stringify(response.text))).deletedCount));
+                done();
+                });
+        });
+    });
+
+
     describe("delete /chapter", () => {
         it("It should delete a chapter from a subject", (done) => {
             chai.request('localhost:3001')
