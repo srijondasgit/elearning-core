@@ -1,7 +1,7 @@
 let chai = require("chai");
 let chaiHttp = require("chai-http")
-let server = require("../../../../../../app.js")
-const classvar = require('../../class.js');
+let server = require("../../../../app.js")
+const classvar = require('../class.js/index.js');
 
 chai.should();
 
@@ -57,6 +57,8 @@ describe ('Create all subjects' , () => {
                     });
             });
         });
+
+        
 
         describe("delete /auth/register", () => {
             it("It should delete a user with Admin role", (done) => {
