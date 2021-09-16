@@ -300,8 +300,8 @@ describe ('Board Api testing' , () => {
         });
     });
 
-    describe("add a Question to a chapter /boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/addQuestion", () => {
-        it("It should add a Question to a chapter", (done) => {
+    describe("add a question to a chapter /boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/addQuestion", () => {
+        it("It should add a question to a chapter", (done) => {
             chai.request('localhost:3001')
                 .patch("/board/boardId/"+boardId+"/classId/"+classId+"/subjectId/"+subjectId+"/chapterId/"+chapterId+"/addQuestion/")
                 .set('Content-Type', 'application/json')
@@ -309,20 +309,20 @@ describe ('Board Api testing' , () => {
                 .send({"indx": 1, "chapterName": "first chapter"})
                 .end((err, response) => {
                     response.should.have.status(200);
-                    QuestionId = response.body;
+                    questionId = response.body;
                     console.log(response.body)
                 done();
                 });
         });
     });
 
-    describe("modify a Question /board/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/QuestionId/:QuestionId/modifyQuestion", () => {
-        it("It should modify Question of a chapter", (done) => {
+    describe("modify a question /board/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/questionId/:questionId/modifyQuestion", () => {
+        it("It should modify question of a chapter", (done) => {
             chai.request('localhost:3001')
-                .patch("/board/boardId/"+boardId+"/classId/"+classId+"/subjectId/"+subjectId+"/chapterId/"+chapterId+"/QuestionId/"+QuestionId+"/modifyQuestion/")
+                .patch("/board/boardId/"+boardId+"/classId/"+classId+"/subjectId/"+subjectId+"/chapterId/"+chapterId+"/questionId/"+questionId+"/modifyQuestion/")
                 .set('Content-Type', 'application/json')
                 .set('auth-token', jwtToken)
-                .send({ "indx": 0, "description": "this is new update of Question"})
+                .send({ "indx": 0, "description": "this is new update of question"})
                 .end((err, response) => {
                     response.should.have.status(200);
                 done();
@@ -330,10 +330,10 @@ describe ('Board Api testing' , () => {
         });
     });
 
-    describe("get class details using boardId", () => {
-        it("It should get the Board for a boardId", (done) => {
+    describe("get class details using classId", () => {
+        it("It should get the class for a classId", (done) => {
             chai.request('localhost:3001')
-                .get("/board/boardId/"+boardId+"/getBoard")
+                .get("/board/boardId/"+boardId+"/classId/"+classId+"/getClass")
                 .set('Content-Type', 'application/json')
                 .set('auth-token', jwtToken)
                 .send()
@@ -345,6 +345,10 @@ describe ('Board Api testing' , () => {
         });
     });
 
+    
+    
+
+   
     
     describe("delete /media", () => {
         it("It should delete a media from a chapter", (done) => {
@@ -365,10 +369,10 @@ describe ('Board Api testing' , () => {
 
 
 
-    describe("delete /Question", () => {
-        it("It should delete a Question from a chapter", (done) => {
+    describe("delete /question", () => {
+        it("It should delete a question from a chapter", (done) => {
             chai.request('localhost:3001')
-                .delete("/board/boardid/"+boardId+"/classId/"+classId+"/subjectId/"+subjectId+"/chapterId/"+chapterId+"/QuestionId/"+QuestionId)
+                .delete("/board/boardid/"+boardId+"/classId/"+classId+"/subjectId/"+subjectId+"/chapterId/"+chapterId+"/questionId/"+questionId)
                 .set('Content-Type', 'application/json')
                 .set('auth-token', jwtToken)
                 .send()
