@@ -17,7 +17,7 @@ describe ('Create all subjects' , () => {
                 chai.request('localhost:3001')
                     .post("/auth/register")
                     .set('Content-Type', 'application/json')
-                    .send({"name":"testuser", "role": "Admin", "email": "testuser502@testuser.com", "password": "Pass123word"
+                    .send({"name":"testuser", "role": "Admin", "email": "testuser503@testuser.com", "password": "Pass123word"
                     })
                     .end((err, response) => {
                         currentResponse = response;
@@ -34,7 +34,7 @@ describe ('Create all subjects' , () => {
                 chai.request('localhost:3001')
                     .post("/auth/verify")
                     .set('Content-Type', 'application/json')
-                    .send({"email": "testuser501@testuser.com", "activationcode": "1000"})
+                    .send({"email": "testuser503@testuser.com", "activationcode": "1000"})
                     .end((err, response) => {
                         currentResponse = response;
                         response.should.have.status(200);
@@ -48,7 +48,7 @@ describe ('Create all subjects' , () => {
                 chai.request('localhost:3001')
                     .post("/auth/login")
                     .set('Content-Type', 'application/json')
-                    .send({"email": "testuser501@testuser.com", "password": "Pass123word"})
+                    .send({"email": "testuser503@testuser.com", "password": "Pass123word"})
                     .end((err, response) => {
                         jwtToken = response.text;
                         response.should.have.status(200);
@@ -58,7 +58,20 @@ describe ('Create all subjects' , () => {
             });
         });
 
-
+        describe("delete /auth/register", () => {
+            it("It should delete a user with Admin role", (done) => {
+                chai.request('localhost:3001')
+                    .delete("/auth/register")
+                    .set('Content-Type', 'application/json')
+                    .send({"name":"testuser", "role": "Admin", "email": "testuser503@testuser.com", "password": "Pass123word"
+                    })
+                    .end((err, response) => {
+                        response.should.have.status(200);
+                        response.should.be.json;
+                    done();
+                    });
+            });
+        });
 
 
 
