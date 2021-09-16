@@ -7,14 +7,14 @@ chai.should();
 chai.use(chaiHttp);
 
 //This is testing code for core functionality
-describe ('Board Api testing' , () => {
+describe ('Create board if board does not already exist' , () => {
 
     describe("post /board/getOneBoardByDescription", () => {
         it("It should get a board when searched by description", (done) => {
             chai.request('localhost:3001')
                 .post("/board/getOneBoardByDescription")
                 .set('Content-Type', 'application/json')
-                .send({"boardName": "CBSE"})
+                .send({"boardName": "ABCD"})
                 .end((err, response) => {
                     cbseBoardId = response.body;
                     response.should.have.status(200);
@@ -75,9 +75,9 @@ describe ('Board Api testing' , () => {
                                 .set('auth-token', jwtToken)
                                 .send({"indx": 1, "boardName": "CBSE", "boardDescription": "CBSE Board content", "governmentId": "NA", "boardVersion": "2021.07.01"})
                                 .end((err, response) => {
-                                    boardId = response.body._id;
+                                    module.exports.boardId = response.body._id;
                                     response.should.have.status(200);
-                                    console.log(boardId)
+                                    console.log(this.boardId)
                                 done();
                                 });
                         });
@@ -86,14 +86,14 @@ describe ('Board Api testing' , () => {
                     describe("create class /board/boardId/:boardId/addClass", () => {
                         it("It should create a class", (done) => {
                             chai.request('localhost:3001')
-                                .patch("/board/boardId/"+boardId+"/addClass")
+                                .patch("/board/boardId/"+this.boardId+"/addClass")
                                 .set('Content-Type', 'application/json')
                                 .set('auth-token', jwtToken)
                                 .send({ "indx": 1, "description": "Class 10"})
                                 .end((err, response) => {
-                                    classId = response.body;
+                                    this.classId10 = response.body;
                                     response.should.have.status(200);
-                                    console.log(classId)
+                                    console.log(this.classId10)
                                 done();
                                 });
                         });
