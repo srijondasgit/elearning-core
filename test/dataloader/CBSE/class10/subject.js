@@ -1,17 +1,21 @@
 let chai = require("chai");
 let chaiHttp = require("chai-http")
 let server = require("../../../../app.js")
-const classvar = require('../class.js/index.js');
+const classvar = require('../classsubject.js/index.js');
 
 chai.should();
 
 chai.use(chaiHttp);
 
+
+
 //This is testing code for core functionality
 describe ('Create all subjects' , () => {
 
-    console.log("Current board id is : "+ classvar.boardId)
-
+        before(async () => {  
+            //require('../class.js');
+        })
+        
         describe("post /auth/register", () => {
             it("It should create a user with SchoolAdmin role", (done) => {
                 chai.request('localhost:3001')
@@ -22,7 +26,9 @@ describe ('Create all subjects' , () => {
                     .end((err, response) => {
                         currentResponse = response;
                         response.should.have.status(200);
-                        response.should.be.json
+                        response.should.be.json;
+                        console.log("Current board id is : "+ classvar.dpBoardId);
+                        console.log("Subject id is : "+ classvar.dpC10SubSs);
                     done();
                     });
             });
@@ -58,7 +64,24 @@ describe ('Create all subjects' , () => {
             });
         });
 
-        
+
+        //add subject
+        describe("add subject using board and classid /boardId/:boardId/classId/:classId/addSubject", () => {
+            it("It should add a subject to a class", (done) => {
+                chai.request('localhost:3001')
+                    .patch("/board/boardId/"+classvar.dpBoardId+"/classId/"+classvar.classId10+"/addSubject")
+                    .set('Content-Type', 'application/json')
+                    .set('auth-token', jwtToken)
+                    .send({"indx": 1, "subjectName": "Social Science"})
+                    .end((err, response) => {
+                        response.should.have.status(200);
+                        dpC10SubSs = response;
+                        console.log("Class 10 - Social science subject id : ");
+                        //console.log(dpC10SubSs)
+                    done();
+                    });
+            });
+        });
 
         describe("delete /auth/register", () => {
             it("It should delete a user with Admin role", (done) => {
