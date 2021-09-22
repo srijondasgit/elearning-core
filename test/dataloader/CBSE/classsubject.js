@@ -227,7 +227,7 @@ describe ('Create board if board does not already exist' , () => {
                         });
                     });
 
-                
+                //add class 8
                     describe("create class /board/boardId/:boardId/addClass", () => {
                         it("It should create a class", (done) => {
                             chai.request('localhost:3001')
@@ -244,7 +244,27 @@ describe ('Create board if board does not already exist' , () => {
                                 });
                         });
                     });
-                
+
+                      //add subject - Class 8 Social Science
+                      describe("add subject using board and classid /boardId/:boardId/classId/:classId/addSubject", () => {
+                        it("It should add a subject to a class", (done) => {
+                            chai.request('localhost:3001')
+                                .patch("/board/boardId/"+dpBoardId+"/classId/"+classId8+"/addSubject")
+                                .set('Content-Type', 'application/json')
+                                .set('auth-token', jwtToken)
+                                .send({"indx": 1, "subjectName": "Social Science"})
+                                .end((err, response) => {
+                                    response.should.have.status(200);
+                                    dpC8SubSs = response.body;
+                                    console.log("Class 8 - Social science subject id : ");
+                                    console.log(dpC8SubSs)
+                                done();
+                                });
+                        });
+                    });
+
+                    // add class 7
+
                     describe("create class /board/boardId/:boardId/addClass", () => {
                         it("It should create a class", (done) => {
                             chai.request('localhost:3001')
