@@ -320,6 +320,25 @@ describe ('Create board if board does not already exist' , () => {
                         });
                     });
                 
+ //add subject - Class 7 English
+ describe("add subject using board and classid /boardId/:boardId/classId/:classId/addSubject", () => {
+    it("It should add a subject to a class", (done) => {
+        chai.request('localhost:3001')
+            .patch("/board/boardId/"+dpBoardId+"/classId/"+classId7+"/addSubject")
+            .set('Content-Type', 'application/json')
+            .set('auth-token', jwtToken)
+            .send({"indx": 3, "subjectName": "English"})
+            .end((err, response) => {
+                response.should.have.status(200);
+                dpC7SubEn = response.body;
+                console.log("Class 7 - English subject id : ");
+                console.log(dpC7SubEn)
+            done();
+            });
+    });
+});
+
+
                     describe("create class /board/boardId/:boardId/addClass", () => {
                         it("It should create a class", (done) => {
                             chai.request('localhost:3001')
