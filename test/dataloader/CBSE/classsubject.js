@@ -432,7 +432,25 @@ describe("add subject using board and classid /boardId/:boardId/classId/:classId
     });
 });
 
-                    describe("delete /auth/register", () => {
+//add subject - Class 6 English
+describe("add subject using board and classid /boardId/:boardId/classId/:classId/addSubject", () => {
+    it("It should add a subject to a class", (done) => {
+        chai.request('localhost:3001')
+            .patch("/board/boardId/"+dpBoardId+"/classId/"+classId6+"/addSubject")
+            .set('Content-Type', 'application/json')
+            .set('auth-token', jwtToken)
+            .send({"indx": 3, "subjectName": "English"})
+            .end((err, response) => {
+                response.should.have.status(200);
+                dpC6SubEn = response.body;
+                console.log("Class 6 - English subject id : ");
+                console.log(dpC6SubEn)
+            done();
+            });
+    });
+});   
+
+describe("delete /auth/register", () => {
                         it("It should delete a user with Admin role", (done) => {
                             chai.request('localhost:3001')
                                 .delete("/auth/register")
