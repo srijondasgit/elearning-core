@@ -414,6 +414,24 @@ describe("add subject using board and classid /boardId/:boardId/classId/:classId
 });
 
 
+ //add subject - Class 6 Science
+ describe("add subject using board and classid /boardId/:boardId/classId/:classId/addSubject", () => {
+    it("It should add a subject to a class", (done) => {
+        chai.request('localhost:3001')
+            .patch("/board/boardId/"+dpBoardId+"/classId/"+classId6+"/addSubject")
+            .set('Content-Type', 'application/json')
+            .set('auth-token', jwtToken)
+            .send({"indx": 2, "subjectName": "Science"})
+            .end((err, response) => {
+                response.should.have.status(200);
+                dpC6SubSc = response.body;
+                console.log("Class 6 - Science subject id : ");
+                console.log(dpC6SubSc)
+            done();
+            });
+    });
+});
+
                     describe("delete /auth/register", () => {
                         it("It should delete a user with Admin role", (done) => {
                             chai.request('localhost:3001')
