@@ -282,6 +282,8 @@ describe ('Create board if board does not already exist' , () => {
                         });
                     });
 
+
+
  //add subject - Class 8 English
  describe("add subject using board and classid /boardId/:boardId/classId/:classId/addSubject", () => {
     it("It should add a subject to a class", (done) => {
@@ -301,25 +303,62 @@ describe ('Create board if board does not already exist' , () => {
 });
 
 
-                    // add class 7
+    // add class 7
 
-                    describe("create class /board/boardId/:boardId/addClass", () => {
-                        it("It should create a class", (done) => {
-                            chai.request('localhost:3001')
-                                .patch("/board/boardId/"+dpBoardId+"/addClass")
-                                .set('Content-Type', 'application/json')
-                                .set('auth-token', jwtToken)
-                                .send({ "indx": 4, "description": "Class 7"})
-                                .end((err, response) => {
-                                    classId7 = response.body;
-                                    //module.exports = {classId7}
-                                    response.should.have.status(200);
-                                    console.log(classId7)
-                                done();
-                                });
-                        });
+    describe("create class /board/boardId/:boardId/addClass", () => {
+         it("It should create a class", (done) => {
+                chai.request('localhost:3001')
+                    .patch("/board/boardId/"+dpBoardId+"/addClass")
+                    .set('Content-Type', 'application/json')
+                    .set('auth-token', jwtToken)
+                    .send({ "indx": 4, "description": "Class 7"})
+                    .end((err, response) => {
+                         classId7 = response.body;
+                         //module.exports = {classId7}
+                        response.should.have.status(200);
+                         console.log(classId7)
+                        done();
                     });
-                
+        });
+    });
+
+                    //add subject - Class 7 Social Science
+describe("add subject using board and classid /boardId/:boardId/classId/:classId/addSubject", () => {
+    it("It should add a subject to a class", (done) => {
+        chai.request('localhost:3001')
+            .patch("/board/boardId/"+dpBoardId+"/classId/"+classId7+"/addSubject")
+            .set('Content-Type', 'application/json')
+            .set('auth-token', jwtToken)
+            .send({"indx": 1, "subjectName": "Social Science"})
+            .end((err, response) => {
+                response.should.have.status(200);
+                dpC7SubSs = response.body;
+                console.log("Class 7 - Social science subject id : ");
+                console.log(dpC7SubSs)
+            done();
+            });
+    });
+});
+
+
+ //add subject - Class 7 Science
+ describe("add subject using board and classid /boardId/:boardId/classId/:classId/addSubject", () => {
+    it("It should add a subject to a class", (done) => {
+        chai.request('localhost:3001')
+            .patch("/board/boardId/"+dpBoardId+"/classId/"+classId7+"/addSubject")
+            .set('Content-Type', 'application/json')
+            .set('auth-token', jwtToken)
+            .send({"indx": 2, "subjectName": "Science"})
+            .end((err, response) => {
+                response.should.have.status(200);
+                dpC7SubSc = response.body;
+                console.log("Class 7 - Science subject id : ");
+                console.log(dpC7SubSc)
+            done();
+            });
+    });
+});
+
  //add subject - Class 7 English
  describe("add subject using board and classid /boardId/:boardId/classId/:classId/addSubject", () => {
     it("It should add a subject to a class", (done) => {
