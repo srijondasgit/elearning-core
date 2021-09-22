@@ -263,6 +263,25 @@ describe ('Create board if board does not already exist' , () => {
                         });
                     });
 
+
+                     //add subject - Class 8 Science
+                     describe("add subject using board and classid /boardId/:boardId/classId/:classId/addSubject", () => {
+                        it("It should add a subject to a class", (done) => {
+                            chai.request('localhost:3001')
+                                .patch("/board/boardId/"+dpBoardId+"/classId/"+classId8+"/addSubject")
+                                .set('Content-Type', 'application/json')
+                                .set('auth-token', jwtToken)
+                                .send({"indx": 2, "subjectName": "Science"})
+                                .end((err, response) => {
+                                    response.should.have.status(200);
+                                    dpC8SubSc = response.body;
+                                    console.log("Class 8 - Science subject id : ");
+                                    console.log(dpC8SubSc)
+                                done();
+                                });
+                        });
+                    });
+
                     // add class 7
 
                     describe("create class /board/boardId/:boardId/addClass", () => {
