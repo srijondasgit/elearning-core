@@ -170,6 +170,32 @@ router.delete('/boardId/:boardId/classId/:classId/', verify, checkRole(['Admin']
       }  
 });
 
+//get class details by boardId and class description
+router.post('/boardId/:boardId/getClassByDesc', verify, checkRole(['Admin']), async (req, res) => {
+    const boardInstance = await board.findById({ "_id": req.params.boardId})
+    //const classInstance= boardInstance.class[0]
+    boardInstance.class.forEach(element => { 
+        if(element.description === req.body.classDescription) {
+            return res.json(element)} 
+        
+    });
+        
+    return res.json("Description not found");
+});
+
+//get classId details by boardId and class description
+router.post('/boardId/:boardId/getClassIdByDesc', verify, checkRole(['Admin']), async (req, res) => {
+    const boardInstance = await board.findById({ "_id": req.params.boardId})
+    //const classInstance= boardInstance.class[0]
+    boardInstance.class.forEach(element => { 
+        if(element.description === req.body.classDescription) {
+            return res.json(element._id)} 
+        
+    });
+        
+    return res.json("Description not found");
+});
+
 //get class details using boardid, classid
 router.get('/boardId/:boardId/classId/:classId/getClass', verify, checkRole(['Admin']), async (req, res) => {
     const boardInstance = await board.findById({ "_id": req.params.boardId})
@@ -266,6 +292,30 @@ router.get('/boardId/:boardId/classId/:classId/subjectId/:subjectId/getSubject',
     const subjectInstance= boardInstance.class.id(req.params.classId).subjects.id(req.params.subjectId)
         
     return res.json(subjectInstance);
+});
+
+//get subject details by boardId, classId and subject name
+router.post('/boardId/:boardId/classId/:classId/getSubjectByName', verify, checkRole(['Admin']), async (req, res) => {
+    const boardInstance = await board.findById({ "_id": req.params.boardId})
+    boardInstance.class.id(req.params.classId).subjects.forEach(element => { 
+        if(element.subjectName === req.body.subjectName) {
+            return res.json(element)} 
+        
+    });
+        
+    return res.json("Subject name not found");
+});
+
+//get subjectId by boardId, classId and subject name
+router.post('/boardId/:boardId/classId/:classId/getSubjectIdByName', verify, checkRole(['Admin']), async (req, res) => {
+    const boardInstance = await board.findById({ "_id": req.params.boardId})
+    boardInstance.class.id(req.params.classId).subjects.forEach(element => { 
+        if(element.subjectName === req.body.subjectName) {
+            return res.json(element._id)} 
+        
+    });
+        
+    return res.json("Subject name not found");
 });
 
 //add chapter to board, class, subject
