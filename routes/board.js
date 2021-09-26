@@ -550,6 +550,37 @@ router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/
     }
 })
 
+//add bulk questions to board, class, subject, chapter
+router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/addBulkQuestions', verify, checkRole(['Admin']), async (req, res) => {
+    try{
+        req.body.bulkQuestions.forEach(async element => { 
+            //return res.json(element.indx)
+            await board.update(
+                { "_id": req.params.boardId}, 
+                {$push: 
+                    {"class.$[e1].subjects.$[e2].chapter.$[e3].questions": 
+                        {
+                            indx: element.indx,
+                            description: element.description,
+                        }
+                    }
+                },
+                {arrayFilters: [{"e1._id": req.params.classId},
+                                {"e2._id": req.params.subjectId},
+                                {"e3._id": req.params.chapterId}]}
+            ); 
+        });
+
+        const newBoard = await board.findOne({ _id: req.params.boardId})
+        leng = newBoard.class.id(req.params.classId).subjects.id(req.params.subjectId).chapter.id(req.params.chapterId).questions.length
+        const result = newBoard.class.id(req.params.classId).subjects.id(req.params.subjectId).chapter.id(req.params.chapterId).questions[leng - 1]._id
+
+        return res.json(result)
+    } catch (err){
+      return res.json({ message: err})
+    }
+})
+
 //modify questions associated with board, class, subject, chapter
 router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/questionId/:questionId/modifyQuestion', verify, checkRole(['Admin']), async (req, res) => {
     try{
