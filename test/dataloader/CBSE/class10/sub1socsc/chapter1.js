@@ -120,22 +120,39 @@ describe ('Create board if board does not already exist' , () => {
                         });
                     });
                  
+                    // commented out as we are doing bulk question updates now
+                    // describe("add questions to a chapter", () => {
+                    //     it("It should add a question to a chapter", (done) => {
+                    //         chai.request('localhost:3001')
+                    //             .patch("/board/boardId/"+cbseBoardId+"/classId/"+classId10+"/subjectId/"+class10ss+"/chapterId/"+chapterId1+"/addQuestion/")
+                    //             .set('Content-Type', 'application/json')
+                    //             .set('auth-token', jwtToken)
+                    //             .send({"indx": 1, "description": "this is a question"})
+                    //             .end((err, response) => {
+                    //                 response.should.have.status(200);
+                    //                 questionId = response.body;
+                    //                 console.log(questionId)
+                    //             done();
+                    //             });
+                    //     });
+                    // });
 
-                    describe("add questions to a chapter", () => {
-                        it("It should add a question to a chapter", (done) => {
-                            chai.request('localhost:3001')
-                                .patch("/board/boardId/"+cbseBoardId+"/classId/"+classId10+"/subjectId/"+class10ss+"/chapterId/"+chapterId1+"/addQuestion/")
-                                .set('Content-Type', 'application/json')
-                                .set('auth-token', jwtToken)
-                                .send({"indx": 1, "description": "this is a question"})
-                                .end((err, response) => {
-                                    response.should.have.status(200);
-                                    questionId = response.body;
-                                    console.log(questionId)
-                                done();
-                                });
+                    //add questions in bulk
+                        describe("add bulk questions to a chapter", () => {
+                            it("It should add a question to a chapter", (done) => {
+                                chai.request('localhost:3001')
+                                    .patch("/board/boardId/"+cbseBoardId+"/classId/"+classId10+"/subjectId/"+class10ss+"/chapterId/"+chapterId1+"/addBulkQuestions/")
+                                    .set('Content-Type', 'application/json')
+                                    .set('auth-token', jwtToken)
+                                    .send({"bulkQuestions":[{"indx": 1, "description": "this is question 1"}, {"indx": 2, "description": "this is a question 2"}, {"indx": 3, "description": "this is a question 3"} ]})
+                                    .end((err, response) => {
+                                        response.should.have.status(200);
+                                        questionId = response.body;
+                                        console.log(questionId)
+                                    done();
+                                    });
+                            });
                         });
-                    });
 
 
 

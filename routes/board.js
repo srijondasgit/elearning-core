@@ -554,7 +554,6 @@ router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/
 router.patch('/boardId/:boardId/classId/:classId/subjectId/:subjectId/chapterId/:chapterId/addBulkQuestions', verify, checkRole(['Admin']), async (req, res) => {
     try{
         req.body.bulkQuestions.forEach(async element => { 
-            //return res.json(element.indx)
             await board.update(
                 { "_id": req.params.boardId}, 
                 {$push: 
