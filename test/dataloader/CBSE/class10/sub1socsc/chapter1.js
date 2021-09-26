@@ -144,7 +144,7 @@ describe ('Create board if board does not already exist' , () => {
                                     .patch("/board/boardId/"+cbseBoardId+"/classId/"+classId10+"/subjectId/"+class10ss+"/chapterId/"+chapterId1+"/addBulkQuestions/")
                                     .set('Content-Type', 'application/json')
                                     .set('auth-token', jwtToken)
-                                    .send({"bulkQuestions":[{"indx": 1, "description": "this is question 1"}, {"indx": 2, "description": "this is a question 2"}, {"indx": 3, "description": "this is a question 3"} ]})
+                                    .send({"bulkQuestions":[{"indx":20, "description":"question 2"},{"indx":30, "description":"question 3"}]})
                                     .end((err, response) => {
                                         response.should.have.status(200);
                                         questionId = response.body;
