@@ -85,38 +85,24 @@ describe ('Create board if board does not already exist' , () => {
                                 });
                         });
 
+                    });
+
+                    describe("get subjectId Social Science for Class 10", () => {
                         it("get subjectId Social Science for Class 10", (done) => {
                             chai.request('localhost:3001')
-                                .post("/board/boardId/"+cbseBoardId+"/classId/"+classId10+"/getSubectIdByName")
+                                .post("/board/boardId/"+cbseBoardId+"/classId/"+classId10+"/getSubjectIdByName")
                                 .set('Content-Type', 'application/json')
                                 .set('auth-token', jwtToken)
                                 .send({"subjectName" : "Social Science"})
                                 .end((err, response) => {
                                     class10ss = response.body;
-                                    //response.should.have.status(200);
+                                    response.should.have.status(200);
                                     console.log("this request ran for boardid "+cbseBoardId+" and class id "+classId10)
                                     console.log(class10ss)
                                 done();
                                 });
                         });
                     });
-
-                    // describe("get subjectId Social Science for Class 10", () => {
-                    //     it("get subjectId Social Science for Class 10", (done) => {
-                    //         chai.request('localhost:3001')
-                    //             .post("/board/boardId/"+cbseBoardId+"/classId/"+classId10+"/getSubectIdByName")
-                    //             .set('Content-Type', 'application/json')
-                    //             .set('auth-token', jwtToken)
-                    //             .send({"subjectName": "Social Science"})
-                    //             .end((err, response) => {
-                    //                 class10ss = response.body;
-                    //                 response.should.have.status(200);
-                    //                 console.log("this request ran for boardid "+cbseBoardId+" and class id"+classId10)
-                    //                 console.log(class10ss)
-                    //             done();
-                    //             });
-                    //     });
-                    // });
 
                     describe("add a chapter of a subject", () => {
                         it("It should add a chapter to Social Science for Class 10", (done) => {
@@ -135,21 +121,21 @@ describe ('Create board if board does not already exist' , () => {
                     });
                  
 
-                    // describe("add a chapter of a subject /boardId/:boardId/classId/:classId/subjectId/:subjectId/addChapter", () => {
-                    //     it("It should add a chapter of a subject", (done) => {
-                    //         chai.request('localhost:3001')
-                    //             .patch("/board/boardId/"+cbseBoardId+"/classId/"+classId10+"/subjectId/"+subjectId+"/addChapter/")
-                    //             .set('Content-Type', 'application/json')
-                    //             .set('auth-token', jwtToken)
-                    //             .send({"indx": 1, "chapterName": "first chapter"})
-                    //             .end((err, response) => {
-                    //                 response.should.have.status(200);
-                    //                 chapterId = response.body;
-                    //                 console.log(response.body)
-                    //             done();
-                    //             });
-                    //     });
-                    // });
+                    describe("add questions to a chapter", () => {
+                        it("It should add a question to a chapter", (done) => {
+                            chai.request('localhost:3001')
+                                .patch("/board/boardId/"+cbseBoardId+"/classId/"+classId10+"/subjectId/"+class10ss+"/chapterId/"+chapterId1+"/addQuestion/")
+                                .set('Content-Type', 'application/json')
+                                .set('auth-token', jwtToken)
+                                .send({"indx": 1, "description": "this is a question"})
+                                .end((err, response) => {
+                                    response.should.have.status(200);
+                                    questionId = response.body;
+                                    console.log(questionId)
+                                done();
+                                });
+                        });
+                    });
 
 
 
