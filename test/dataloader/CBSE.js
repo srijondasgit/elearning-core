@@ -12,6 +12,10 @@ describe ('Starting data loader' , () => {
         require('./CBSE/class10/sub1socsc/chapter1.js')
         require('./CBSE/class10/sub1socsc/chapter2.js')
         require('./CBSE/class10/sub1socsc/chapter3.js')
+
+
+        require('./CBSE/class10/sub2science/chapter1.js')
+
     })
 
     
