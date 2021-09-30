@@ -13,5 +13,3 @@ exports.questions = [
     {"indx":80, 
     "description":"question 8"},
     {" index":90, "description": "question 9"}]
-
-
