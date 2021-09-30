@@ -16,6 +16,11 @@ describe ('Starting data loader' , () => {
 
         require('./CBSE/class10/sub2science/chapter1.js')
 
+
+
+
+        require('./CBSE/class10/sub3english/chapter1.js')
+
     })
 
     
