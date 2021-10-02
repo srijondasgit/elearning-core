@@ -78,7 +78,7 @@ describe ('Create board if board does not already exist' , () => {
                                 .post("/board/boardId/"+cbseBoardId+"/getClassIdByDesc")
                                 .set('Content-Type', 'application/json')
                                 .set('auth-token', jwtToken)
-                                .send({ "classDescription": "Class 09"})
+                                .send({ "classDescription": "Class 9"})
                                 .end((err, response) => {
                                     classId09 = response.body;
                                     response.should.have.status(200);
