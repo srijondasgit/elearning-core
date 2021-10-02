@@ -32,6 +32,7 @@ describe ('Starting data loader' , () => {
         // class 09 social science
 
         require('./CBSE/class09/sub1socsc/chapter1.js')
+        require('./CBSE/class09/sub1socsc/chapter2.js')
 
     })
 
