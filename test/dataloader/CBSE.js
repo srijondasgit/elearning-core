@@ -36,8 +36,7 @@ describe ('Starting data loader' , () => {
 
     })
 
-    
-
-
+        // class 8 social science
+        require('./CBSE/class08/sub1socsc/chapter1.js')
 
 });
