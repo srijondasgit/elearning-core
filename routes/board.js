@@ -35,7 +35,7 @@ router.get('/getAllBoards', async (req, res) => {
     return res.json(result);
 });
 
-//get board details
+//details
 router.get('/boardId/:boardId/getBoard', verify, checkRole(['Admin']), async (req, res) => {
     try{
         const boardInstance = await board.findOne({  _id: req.params.boardId })

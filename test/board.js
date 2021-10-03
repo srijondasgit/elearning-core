@@ -404,6 +404,22 @@ describe ('Board Api testing' , () => {
         });
     });
 
+
+    describe("get one Board by Description ", () => {
+        it("It should get  a Board by Description", (done) => {
+            chai.request('localhost:3001')
+                .post("/board/getOneBoardByDescription")
+                .set('Content-Type', 'application/json')
+                .set('auth-token', jwtToken)
+                .send({"boardName": "ksee"})
+                .end((err, response) => {
+                    response.should.have.status(200);
+                    console.log(response.body)
+                    console.log("this is my test")
+                done();
+                });
+        });
+    });
     
     describe("delete /subject", () => {
         it("It should delete a subject from a class", (done) => {
