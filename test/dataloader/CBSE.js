@@ -44,4 +44,9 @@ describe ('Starting data loader' , () => {
 
         require('./CBSE/class7/sub1socsc/chapter1.js')
 
+
+        // class 6 social science
+
+        require('./CBSE/class6/sub1socsc/chapter1.js')
+
 });
