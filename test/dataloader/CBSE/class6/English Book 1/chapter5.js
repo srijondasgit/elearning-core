@@ -112,7 +112,7 @@ describe ('Create board if board does not already exist' , () => {
                                 .patch("/board/boardId/"+cbseBoardId+"/classId/"+classId6+"/subjectId/"+class6eng+"/addChapter/")
                                 .set('Content-Type', 'application/json')
                                 .set('auth-token', jwtToken)
-                                .send({"indx": 5, "chapterName": "","chapterDesc":"How bright on the blue Is a kite when it’s new! With a dive and a dip It snaps its How bright on the blue Is a kite when it’s new! With a dive and a dip It snaps its tailf"})
+                                .send({"indx": 5, "chapterName": " Taro’s Reward ","chapterDesc":"A YOUNG woodcutter named Taro lived with his mother and father on a lonely hillside. All day long he chopped wood in the forest. Though he worked very hard, he earned very little money. This made him sad, for he was a thoughtful son and wanted to give his old parents everything they needed."})
                                 
                                 .end((err, response) => {
                                     response.should.have.status(200);
