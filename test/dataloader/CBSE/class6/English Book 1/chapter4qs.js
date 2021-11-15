@@ -1,0 +1,26 @@
+
+exports.questions = [
+    {"indx":1, 
+    "description":"How is the kite like a ship? Describe after the poet."},
+    {"indx":2, 
+    "description":"When does a kite become ugly? "},
+    {"indx":3, 
+    "description":"How does a new kite look like in the blue sky? "},
+    {"indx":4, 
+    "description": "The Kite snaps its. (a) head (b) body (c) string (d) tail."},
+    {"indx":5, 
+    "description": " The kite soars like (a) train (b) Jet (c) ship (d) sea "},
+    {"indx":6, 
+    "description": " What do you mean by the term ‘slack’ ? (a) shiver (b) loose (c) tight (d) lift up."},
+    {"indx":7, 
+    "description": " What was the final status of the Kite? (a) perfect (b) colourful (c) bright (d) torn and dirty.."},
+    {"indx":8, 
+    "description": " At the end the kite was caught on a (a) roof (b) rock (c) tree (d) plant."},
+    {"indx":9, 
+    "description": " It shines like --------------(a) sea (b) moon (c) earth (d) star."},
+    {"indx":10, 
+    "description": " Climbs to the crest, Of a gust and pull. What do you mean by the term ,”gust”."},
+    {"indx":11, 
+    "description": "  Read these lines from the poem: Then soars like a ship With only a sail The movement of the tailless kite is compared to a ship with a sail. This is called a simile. Can you suggest what or who the following actions may be compared to? "},
+   
+]
